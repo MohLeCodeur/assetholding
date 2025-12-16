@@ -3,9 +3,8 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Client Area | Asset Holding</title>
+    <title>Asset Holding – Smart, steady & exclusive investing</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="../../favicon.ico" />
     <style>
         :root {
             --bg: #050816;
@@ -39,9 +38,12 @@
             color: var(--text);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
         .page {
@@ -81,7 +83,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            text-decoration: none;
         }
 
         .logo img {
@@ -114,73 +115,318 @@
             color: var(--muted);
         }
 
-        main {
-            flex: 1;
+        .nav-links {
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 40px 18px;
+            gap: 18px;
+            font-size: 13px;
         }
 
-        .login-container {
-            width: 100%;
-            max-width: 480px;
+        /* Mettre à jour la navigation pour pointer vers les nouvelles sections détaillées */
+        .nav-links a {
+            padding: 6px 10px;
+            border-radius: 999px;
+            color: var(--muted);
+            border: 1px solid transparent;
+            transition: var(--transition);
         }
 
-        .login-card {
-            background: var(--card);
-            border-radius: var(--radius-xl);
-            border: 1px solid rgba(245, 199, 106, 0.32);
-            padding: 32px;
-            box-shadow: var(--shadow-soft);
+        .nav-links a:hover {
+            color: var(--text);
+            border-color: rgba(245, 199, 106, 0.45);
+            background: rgba(245, 199, 106, 0.08);
         }
 
-        .login-header {
-            text-align: center;
-            margin-bottom: 28px;
+        .nav-cta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .login-header h1 {
-            font-size: 24px;
-            margin-bottom: 8px;
+        .btn {
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-size: 13px;
+            border: 1px solid var(--border);
+            background: rgba(9, 12, 30, 0.96);
+            color: var(--text);
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: radial-gradient(circle at 20% 0, #ffe8a6, #f5c76a);
+            color: #181818;
+            border-color: rgba(245, 199, 106, 0.9);
+            box-shadow: 0 10px 30px rgba(245, 199, 106, 0.6);
+            font-weight: 600;
+        }
+
+        .btn-outline {
+            border-color: rgba(245, 199, 106, 0.6);
+            color: var(--accent-strong);
+            background: transparent;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 34px rgba(0, 0, 0, 0.6);
+        }
+
+        main {
+            flex: 1;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 42px 0 40px;
+            background-image: url("https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 15% 0, rgba(245, 199, 106, 0.22), transparent 55%),
+                linear-gradient(to bottom, rgba(5, 8, 22, 0.92), rgba(5, 8, 22, 0.97));
+        }
+
+        .hero>.container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+            gap: 32px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .headline {
+            font-size: clamp(32px, 4vw, 44px);
+            line-height: 1.05;
+            margin-bottom: 16px;
+        }
+
+        .headline span {
             background: linear-gradient(120deg, #f5c76a, #ffe8aa);
             -webkit-background-clip: text;
             color: transparent;
         }
 
-        .login-header p {
-            font-size: 13px;
+        .hero-text {
+            font-size: 14px;
+            color: var(--muted);
+            max-width: 540px;
+            margin-bottom: 22px;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .badge {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(11, 15, 35, 0.92);
             color: var(--muted);
         }
 
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-            margin-top: 20px;
+        .badge span {
+            color: var(--accent);
+            font-weight: 600;
         }
 
-        @media (max-width: 600px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 6px;
         }
 
-        .dashboard-card {
-            background: rgba(9, 12, 30, 0.96);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border);
-            padding: 16px;
-            text-decoration: none;
+        .hero-note {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .hero-note span {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .hero-card {
+            border-radius: var(--radius-xl);
+            background: radial-gradient(circle at 15% 0, rgba(245, 199, 106, 0.18), #050816);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: var(--shadow-soft);
+            padding: 18px 18px 16px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            transition: var(--transition);
+            gap: 12px;
             position: relative;
             overflow: hidden;
         }
 
-        .dashboard-card::before {
+        .hero-card-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--muted);
+        }
+
+        .hero-card-main {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .hero-card-figure {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .hero-card-sub {
+            font-size: 11px;
+            color: var(--muted);
+            max-width: 190px;
+            text-align: right;
+        }
+
+        .hero-card-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+        .pill {
+            padding: 3px 9px;
+            border-radius: 999px;
+            background: rgba(9, 14, 35, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* Sections */
+        section {
+            padding: 30px 0;
+            background: radial-gradient(circle at 120% 0, rgba(255, 255, 255, 0.04), transparent 60%);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 16px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .section-kicker {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--muted);
+        }
+
+        .section-intro {
+            font-size: 12px;
+            color: var(--muted);
+            max-width: 420px;
+        }
+
+        .twocol {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+            gap: 22px;
+            align-items: flex-start;
+        }
+
+        .section-text {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .section-text p+p {
+            margin-top: 8px;
+        }
+
+        .section-card {
+            background: var(--card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            padding: 14px 14px 12px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .section-card strong {
+            color: var(--accent-strong);
+            font-weight: 600;
+        }
+
+        .pill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .pill-soft {
+            border-radius: 999px;
+            font-size: 11px;
+            padding: 4px 10px;
+            background: rgba(245, 199, 106, 0.08);
+            border: 1px solid rgba(245, 199, 106, 0.25);
+            color: var(--accent-strong);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .mini-card {
+            background: var(--card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            padding: 10px 10px 9px;
+            font-size: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mini-card::before {
             content: "";
             position: absolute;
             inset: 0;
@@ -190,150 +436,165 @@
             pointer-events: none;
         }
 
-        .dashboard-card:hover {
-            transform: translateY(-2px);
-            border-color: rgba(245, 199, 106, 0.6);
-        }
-
-        .dashboard-card:hover::before {
+        .mini-card:hover::before {
             opacity: 1;
         }
 
-        .dashboard-card-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .dashboard-card-icon {
-            font-size: 24px;
-        }
-
-        .dashboard-card-title {
-            font-size: 14px;
+        .mini-card-title {
             font-weight: 600;
-            color: var(--accent-strong);
-        }
-
-        .dashboard-card-desc {
+            margin-bottom: 4px;
             font-size: 12px;
-            color: var(--muted);
-        }
-
-        .card-status {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 15px;
-            font-size: 10px;
-            font-weight: 600;
-            margin-left: auto;
-        }
-
-        .status-active {
-            background: rgba(46, 125, 50, 0.2);
-            color: #4caf50;
-        }
-
-        .status-pending {
-            background: rgba(239, 108, 0, 0.2);
-            color: #ff9800;
-        }
-
-        .status-new {
-            background: rgba(21, 101, 192, 0.2);
-            color: #2196f3;
-        }
-
-        .form-field {
-            margin-bottom: 16px;
-        }
-
-        .form-field label {
-            display: block;
-            font-size: 13px;
-            color: var(--text);
-            margin-bottom: 6px;
-            font-weight: 500;
-        }
-
-        .form-field input {
-            width: 100%;
-            padding: 12px 14px;
-            background: rgba(9, 12, 30, 0.96);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            color: var(--text);
-            font-size: 14px;
-            transition: var(--transition);
-        }
-
-        .form-field input:focus {
-            outline: none;
-            border-color: rgba(245, 199, 106, 0.6);
-            box-shadow: 0 0 0 3px rgba(245, 199, 106, 0.1);
-        }
-
-        .btn {
-            width: 100%;
-            padding: 12px 16px;
-            border-radius: 999px;
-            font-size: 14px;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 600;
-        }
-
-        .btn-primary {
-            background: radial-gradient(circle at 20% 0, #ffe8a6, #f5c76a);
-            color: #181818;
-            box-shadow: 0 10px 30px rgba(245, 199, 106, 0.6);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 12px 34px rgba(245, 199, 106, 0.7);
-        }
-
-        .btn-primary:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .login-error {
-            background: rgba(220, 38, 38, 0.15);
-            color: #ef4444;
-            padding: 12px;
-            border-radius: 10px;
-            font-size: 13px;
-            margin-bottom: 16px;
-            display: none;
-            border: 1px solid rgba(220, 38, 38, 0.3);
-        }
-
-        .login-footer {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 13px;
-            color: var(--muted);
-        }
-
-        .login-footer a {
             color: var(--accent-strong);
-            text-decoration: none;
-            font-weight: 500;
         }
 
-        .login-footer a:hover {
-            text-decoration: underline;
+        .mini-card-text {
+            color: var(--muted);
+            font-size: 11px;
         }
 
-        .login-section {
-            display: none;
+        /* Team */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
         }
 
-        .dashboard-content {
-            display: none;
+        .team-card {
+            background: linear-gradient(145deg, #101425, #050816);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            padding: 10px 10px 12px;
+            font-size: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-photo {
+            width: 100%;
+            border-radius: 14px;
+            object-fit: cover;
+            max-height: 180px;
+            margin-bottom: 8px;
+            filter: saturate(1.05);
+        }
+
+        .team-role {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .team-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent-strong);
+            margin-bottom: 4px;
+        }
+
+        .team-focus {
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+
+        .team-tagline {
+            font-size: 11px;
+            color: var(--muted);
+            opacity: 0.85;
+        }
+
+        /* Feature boxes */
+        .feature-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+            gap: 22px;
+            align-items: flex-start;
+        }
+
+        .feature-layout.inverted {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+        }
+
+        .feature-layout.inverted div:first-child {
+            order: 2;
+        }
+
+        .feature-layout.inverted div:last-child {
+            order: 1;
+        }
+
+        .feature-box {
+            background: var(--card);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(245, 199, 106, 0.32);
+            padding: 16px 16px 14px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+            font-size: 12px;
+        }
+
+        .feature-box h3 {
+            font-size: 15px;
+            margin-bottom: 8px;
+            color: var(--accent-strong);
+        }
+
+        .feature-list {
+            margin-top: 8px;
+            padding-left: 16px;
+            color: var(--muted);
+        }
+
+        .feature-list li+li {
+            margin-top: 4px;
+        }
+
+        .note {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 8px;
+        }
+
+        /* Contact */
+        .contact {
+            border-radius: var(--radius-xl);
+            background: linear-gradient(130deg,
+                    rgba(245, 199, 106, 0.06),
+                    rgba(7, 11, 32, 0.96));
+            border: 1px solid rgba(245, 199, 106, 0.24);
+            padding: 16px 16px 14px;
+            margin-top: 12px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+            gap: 16px;
+            font-size: 12px;
+        }
+
+        .contact h3 {
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .contact-details p {
+            margin-bottom: 4px;
+            color: var(--muted);
+        }
+
+        .contact-details span {
+            color: var(--text);
+        }
+
+        .contact-cta {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+            text-align: right;
+        }
+
+        .contact-cta small {
+            color: var(--muted);
+            font-size: 11px;
         }
 
         footer {
@@ -346,10 +607,412 @@
 
         .footer-row {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
             align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
             gap: 10px;
             flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            opacity: 0.75;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--accent-strong);
+        }
+
+        /* Tablet and below */
+        @media (max-width: 880px) {
+
+            .hero-grid,
+            .twocol,
+            .grid-3,
+            .team-grid,
+            .feature-layout,
+            .contact,
+            .feature-layout.inverted {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .feature-layout.inverted div:first-child {
+                order: 1;
+            }
+
+            .feature-layout.inverted div:last-child {
+                order: 2;
+            }
+
+            .hero {
+                padding-top: 28px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .contact-cta {
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .grid-3 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            /* Navigation mobile */
+            .nav {
+                padding: 12px 0;
+                gap: 12px;
+            }
+
+            .logo img {
+                width: 32px;
+                height: 32px;
+            }
+
+            .logo-text span:first-child {
+                font-size: 10px;
+            }
+
+            .logo-text span:last-child {
+                font-size: 11px;
+            }
+
+            .nav-cta {
+                gap: 8px;
+            }
+
+            .btn {
+                padding: 7px 12px;
+                font-size: 12px;
+                gap: 4px;
+            }
+
+            /* Hero section mobile */
+            .hero {
+                padding: 24px 0 32px;
+            }
+
+            .hero-grid {
+                gap: 24px;
+            }
+
+            .eyebrow {
+                font-size: 10px;
+                margin-bottom: 8px;
+            }
+
+            .headline {
+                font-size: clamp(24px, 7vw, 32px);
+                line-height: 1.15;
+                margin-bottom: 14px;
+            }
+
+            .hero-text {
+                font-size: 13px;
+                margin-bottom: 18px;
+            }
+
+            .hero-badges {
+                gap: 8px;
+                margin-bottom: 18px;
+            }
+
+            .badge {
+                font-size: 10px;
+                padding: 3px 8px;
+            }
+
+            .hero-actions {
+                gap: 10px;
+                margin-bottom: 8px;
+            }
+
+            .hero-actions .btn {
+                flex: 1;
+                justify-content: center;
+                min-width: 0;
+            }
+
+            .hero-note {
+                font-size: 10px;
+            }
+
+            .hero-card {
+                padding: 14px 14px 12px;
+                gap: 10px;
+            }
+
+            .hero-card-tag {
+                font-size: 10px;
+            }
+
+            .hero-card-figure {
+                font-size: 18px;
+            }
+
+            .hero-card-sub {
+                font-size: 10px;
+                max-width: 100%;
+            }
+
+            .hero-card-pills {
+                gap: 6px;
+                font-size: 9px;
+            }
+
+            .pill {
+                padding: 2px 7px;
+            }
+
+            /* Sections mobile */
+            section {
+                padding: 24px 0;
+            }
+
+            .section-header {
+                margin-bottom: 14px;
+                gap: 10px;
+            }
+
+            .section-kicker {
+                font-size: 10px;
+            }
+
+            .section-title {
+                font-size: 16px;
+            }
+
+            .section-intro {
+                font-size: 11px;
+            }
+
+            .twocol {
+                gap: 16px;
+            }
+
+            .section-text {
+                font-size: 12px;
+            }
+
+            .section-card {
+                padding: 12px 12px 10px;
+                font-size: 11px;
+            }
+
+            .pill-list {
+                gap: 6px;
+                margin-top: 8px;
+            }
+
+            .pill-soft {
+                font-size: 10px;
+                padding: 3px 8px;
+            }
+
+            /* Grid adjustments for mobile */
+            .grid-3 {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 12px;
+            }
+
+            .mini-card {
+                padding: 12px 12px 10px;
+                font-size: 11px;
+            }
+
+            .mini-card-title {
+                font-size: 11px;
+                margin-bottom: 3px;
+            }
+
+            .mini-card-text {
+                font-size: 10px;
+            }
+
+            /* Team section mobile */
+            .team-grid {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 14px;
+            }
+
+            .team-card {
+                padding: 12px 12px 10px;
+                font-size: 11px;
+            }
+
+            .team-photo {
+                max-height: 220px;
+                margin-bottom: 10px;
+            }
+
+            .team-role {
+                font-size: 10px;
+                margin-bottom: 3px;
+            }
+
+            .team-name {
+                font-size: 12px;
+                margin-bottom: 3px;
+            }
+
+            .team-focus {
+                font-size: 11px;
+                margin-bottom: 5px;
+            }
+
+            .team-tagline {
+                font-size: 10px;
+            }
+
+            /* Feature layouts mobile */
+            .feature-layout {
+                gap: 16px;
+            }
+
+            .feature-box {
+                padding: 14px 14px 12px;
+                font-size: 11px;
+            }
+
+            .feature-box h3 {
+                font-size: 13px;
+                margin-bottom: 6px;
+            }
+
+            .feature-list {
+                margin-top: 6px;
+                padding-left: 14px;
+                font-size: 11px;
+            }
+
+            .feature-list li+li {
+                margin-top: 3px;
+            }
+
+            .note {
+                font-size: 10px;
+                margin-top: 6px;
+            }
+
+            /* Contact section mobile */
+            .contact {
+                padding: 14px 14px 12px;
+                margin-top: 10px;
+                gap: 14px;
+                font-size: 11px;
+            }
+
+            .contact h3 {
+                font-size: 13px;
+                margin-bottom: 5px;
+            }
+
+            .contact-details p {
+                margin-bottom: 3px;
+                font-size: 11px;
+            }
+
+            .contact-cta small {
+                font-size: 10px;
+            }
+
+            /* Footer mobile */
+            footer {
+                padding: 12px 0 16px;
+                font-size: 10px;
+            }
+
+            .footer-row {
+                gap: 8px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-links {
+                gap: 8px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* Extra small mobile devices */
+        @media (max-width: 375px) {
+            .container {
+                padding: 0 14px;
+            }
+
+            .headline {
+                font-size: 22px;
+            }
+
+            .hero-text {
+                font-size: 12px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .hero-actions .btn {
+                width: 100%;
+            }
+
+            .btn {
+                padding: 8px 14px;
+                font-size: 11px;
+            }
+
+            .section-title {
+                font-size: 15px;
+            }
+
+            .nav-cta {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .nav-cta .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Improve touch targets for mobile */
+        @media (hover: none) and (pointer: coarse) {
+            .btn {
+                min-height: 44px;
+                padding: 10px 16px;
+            }
+
+            .nav-links a {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+
+            .mini-card {
+                min-height: 60px;
+            }
         }
     </style>
 </head>
@@ -359,189 +1022,925 @@
         <header>
             <div class="container">
                 <div class="nav">
-                    <a href="../../index.html" class="logo">
+                    <div class="logo">
                         <img src="https://www.beta-concept.com/media/1015/sss.png" alt="Asset Holding logo" />
                         <div class="logo-text">
                             <span>ASSET HOLDING</span>
                             <span>Smart, steady investing</span>
                         </div>
-                    </a>
+                    </div>
+                    <nav class="nav-links">
+                        <a href="#story">Our Story</a>
+                        <a href="#mission">Our Mission</a>
+                        <a href="#segments">Segments</a>
+                        <a href="#team">Team</a>
+                        <a href="#contact">Contact</a>
+                    </nav>
+                    <div class="nav-cta">
+                        <a href="account/login/index.html" class="btn btn-outline">
+                            Client Area
+                        </a>
+                        <button class="btn btn-primary"
+                            onclick="document.getElementById('proposal').scrollIntoView({behavior:'smooth'})">
+                            Proposal investing
+                        </button>
+                    </div>
                 </div>
             </div>
         </header>
 
         <main>
-            <div class="login-container">
-                <div class="login-card">
-                    <!-- Login Section -->
-                    <div id="login-section" class="login-section">
-                        <div class="login-header">
-                            <h1>Client Area</h1>
-                            <p>Access your portfolio and account information</p>
-                        </div>
-
-                        <div class="login-error" id="login-error"></div>
-
-                        <form id="login-form">
-                            <div class="form-field">
-                                <label for="login-email">Email address</label>
-                                <input type="email" id="login-email" placeholder="your@email.com" required />
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-grid">
+                        <div>
+                            <div class="eyebrow">Independent asset management</div>
+                            <h1 class="headline">
+                                Smart, steady <span>and private</span> investing.
+                            </h1>
+                            <p class="hero-text">
+                                We work with a limited number of selected clients, combining real estate,
+                                structured finance and bespoke advisory to build and protect long-term wealth.
+                                Every mandate is tailored, discreet and execution-driven.
+                            </p>
+                            <div class="hero-badges">
+                                <div class="badge"><span>2003</span> · Established</div>
+                                <div class="badge"><span>Multi-asset</span> · Real estate & finance</div>
+                                <div class="badge"><span>Suisse</span> · European hub</div>
                             </div>
-                            <div class="form-field">
-                                <label for="login-password">Password</label>
-                                <input type="password" id="login-password" placeholder="Enter your password" required />
+                            <div class="hero-actions">
+                                <button class="btn btn-primary"
+                                    onclick="document.getElementById('proposal').scrollIntoView({behavior:'smooth'})">
+                                    Discuss an opportunity
+                                </button>
+                                <button class="btn"
+                                    onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})">
+                                    Discover our approach
+                                </button>
                             </div>
-                            <button type="submit" class="btn btn-primary" id="login-btn">Login</button>
-                        </form>
-
-                        <div class="login-footer">
-                            <a href="../password-reset/index.html">Forgot your password?</a>
-                        </div>
-                    </div>
-
-                    <!-- Dashboard Content -->
-                    <div id="dashboard-content" class="dashboard-content">
-                        <div class="login-header">
-                            <h1>Client Dashboard</h1>
-                            <p>Welcome back! Select a section to continue</p>
+                            <div class="hero-note">
+                                <span>Private, selective & long-term</span> — no mass products, only tailored
+                                strategies.
+                            </div>
                         </div>
 
-                        <div class="dashboard-grid">
-                            <a href="../dashboard/index.html" class="dashboard-card">
-                                <div class="dashboard-card-header">
-                                    <span class="dashboard-card-icon">📊</span>
-                                    <span class="dashboard-card-title">Dashboard</span>
-                                    <span class="card-status status-active">Active</span>
+                        <div class="hero-card">
+                            <div class="hero-card-tag">Core focus</div>
+                            <div class="hero-card-main">
+                                <div>
+                                    <div class="hero-card-figure">Real assets & finance</div>
+                                    <div class="hero-card-sub">
+                                        From real estate development to structured lending and private deals,
+                                        we design transactions with aligned incentives.
+                                    </div>
                                 </div>
-                                <p class="dashboard-card-desc">View your account overview</p>
-                            </a>
-
-                            <a href="../portfolio/index.html" class="dashboard-card">
-                                <div class="dashboard-card-header">
-                                    <span class="dashboard-card-icon">💼</span>
-                                    <span class="dashboard-card-title">Portfolio</span>
-                                    <span class="card-status status-active">Active</span>
-                                </div>
-                                <p class="dashboard-card-desc">Asset allocation & holdings</p>
-                            </a>
-
-                            <a href="../reports/index.html" class="dashboard-card">
-                                <div class="dashboard-card-header">
-                                    <span class="dashboard-card-icon">📄</span>
-                                    <span class="dashboard-card-title">Reports</span>
-                                    <span class="card-status status-new">2 New</span>
-                                </div>
-                                <p class="dashboard-card-desc">Documents & statements</p>
-                            </a>
-
-                            <a href="../kyc/index.html" class="dashboard-card">
-                                <div class="dashboard-card-header">
-                                    <span class="dashboard-card-icon">✅</span>
-                                    <span class="dashboard-card-title">KYC</span>
-                                    <span class="card-status status-pending">Pending</span>
-                                </div>
-                                <p class="dashboard-card-desc">Verification & compliance</p>
-                            </a>
-
-                            <a href="../support/index.html" class="dashboard-card">
-                                <div class="dashboard-card-header">
-                                    <span class="dashboard-card-icon">💬</span>
-                                    <span class="dashboard-card-title">Support</span>
-                                    <span class="card-status status-new">1 New</span>
-                                </div>
-                                <p class="dashboard-card-desc">Secure messaging</p>
-                            </a>
-
-                            <a href="../../index.html" class="dashboard-card" id="logout-card">
-                                <div class="dashboard-card-header">
-                                    <span class="dashboard-card-icon">🚪</span>
-                                    <span class="dashboard-card-title">Logout</span>
-                                </div>
-                                <p class="dashboard-card-desc">Sign out of your account</p>
-                            </a>
+                            </div>
+                            <div class="hero-card-pills">
+                                <span class="pill">Collective mandates</span>
+                                <span class="pill">Private wealth</span>
+                                <span class="pill">Equity & participation</span>
+                                <span class="pill">Loan structures</span>
+                                <span class="pill">Development projects</span>
+                                <span class="pill">Discreet execution</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            <section id="story">
+                <div class="container">
+                    <div class="section-header">
+                        <div>
+                            <div class="section-kicker">Our Story</div>
+                            <h2 class="section-title">From real estate roots to integrated asset management.</h2>
+                        </div>
+                        <div class="section-intro">
+                            Fondée en 2003, Asset Holding se concentrait initialement sur le développement
+                            immobilier et la promotion de projets avant d'évoluer vers une plateforme d'investissement
+                            multi-actifs plus large.
+                        </div>
+                    </div>
+                    <div class="twocol">
+                        <div class="section-text">
+                            <p>
+                                Au fil des ans, Asset Holding a travaillé sur des projets de développement, des
+                                transactions structurées et des détentions à long terme, affinant constamment
+                                son approche autour de la discipline, de la gestion des risques et des intérêts
+                                alignés avec ses investisseurs.
+                            </p>
+                            <p>
+                                Aujourd'hui, nous réunissons actifs réels, structures financières et conseils
+                                stratégiques, toujours avec le même objectif : construire et préserver la
+                                valeur dans le temps, loin du bruit et du court-termisme.
+                            </p>
+                        </div>
+                        <div class="section-card">
+                            <strong>Key milestones (example):</strong>
+                            <ul style="margin-top:6px; padding-left:16px;">
+                                <li>2003 – Creation of Asset Holding, real estate focused</li>
+                                <li>Expansion into structured investment vehicles</li>
+                                <li>Development of private mandates for European investors</li>
+                                <li>Integration of advisory, real assets and loan structures</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="mission">
+                <div class="container">
+                    <div class="section-header">
+                        <div>
+                            <div class="section-kicker">Our Mission</div>
+                            <h2 class="section-title">Guide, structure and transmit long-term capital.</h2>
+                        </div>
+                        <div class="section-intro">
+                            We work as a long-term partner, not a product provider. Our mission is to help clients
+                            structure, grow and transmit their wealth in a pragmatic, secure and tax-efficient way.
+                        </div>
+                    </div>
+                    <div class="twocol">
+                        <div class="section-text">
+                            <p>
+                                Chaque situation client est unique. Nous combinons l'immobilier, les instruments
+                                financiers et
+                                des structures personnalisées pour répondre à l'appétit au risque, au calendrier et aux
+                                objectifs. Notre équipe travaille
+                                en étroite collaboration avec des experts juridiques et fiscaux pour garantir que chaque
+                                transaction ait un sens, à la fois
+                                économiquement et structurellement.
+                            </p>
+                        </div>
+                        <div class="section-card">
+                            <strong>We focus on:</strong>
+                            <div class="pill-list">
+                                <span class="pill-soft">Capital preservation</span>
+                                <span class="pill-soft">Steady performance</span>
+                                <span class="pill-soft">Tax & legal structuring</span>
+                                <span class="pill-soft">Succession & transmission</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="segments">
+                <div class="container">
+                    <div class="section-header">
+                        <div>
+                            <div class="section-kicker">Segments</div>
+                            <h2 class="section-title">How we structure opportunities.</h2>
+                        </div>
+                        <div class="section-intro">
+                            Nous ne croyons pas au "taille unique". Nous construisons des stratégies complémentaires,
+                            structurées
+                            sur plusieurs segments.
+                        </div>
+                    </div>
+                    <div class="grid-3">
+                        <a href="#collective-detail" class="mini-card">
+                            <div class="mini-card-title">Gestion Collective</div>
+                            <div class="mini-card-text">
+                                Véhicules d'investissement mutualisés, réservés à un cercle restreint d'investisseurs
+                                qualifiés (Cliquez pour Détails).
+                            </div>
+                        </a>
+                        <a href="#private-detail" class="mini-card">
+                            <div class="mini-card-title">Mandats Privés Personnalisés</div>
+                            <div class="mini-card-text">
+                                Solutions sur mesure pour les familles fortunées et les entrepreneurs avec des objectifs
+                                définis (Cliquez pour Détails).
+                            </div>
+                        </a>
+                        <a href="#equity-detail" class="mini-card">
+                            <div class="mini-card-title">Capital et Participations</div>
+                            <div class="mini-card-text">
+                                Prises de participation directes ou indirectes dans des véhicules de développement
+                                (Cliquez pour Détails).
+                            </div>
+                        </a>
+                        <a href="#loan-detail" class="mini-card">
+                            <div class="mini-card-title">Structures de Prêts et Crédits</div>
+                            <div class="mini-card-text">
+                                Montages financiers Senior, Mezzanine ou Bridge, calibrés sur les flux de trésorerie
+                                (Cliquez pour Détails).
+                            </div>
+                        </a>
+                        <a href="#realestate-detail" class="mini-card">
+                            <div class="mini-card-title">Projets Immobiliers</div>
+                            <div class="mini-card-text">
+                                Développement, repositionnement et détention à long terme d'actifs stratégiques (Cliquez
+                                pour Détails).
+                            </div>
+                        </a>
+                        <a href="#marketing-detail" class="mini-card">
+                            <div class="mini-card-title">Conseil Stratégique (Marketing)</div>
+                            <div class="mini-card-text">
+                                Accompagnement des promoteurs sur le montage, la négociation et la levée de capitaux
+                                (Cliquez pour Détails).
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="collective-detail">
+                <div class="container">
+                    <div class="section-header">
+                        <div>
+                            <div class="section-kicker">Segment de Détail</div>
+                            <h2 class="section-title">Mandats de Gestion Collective: Mutualisation d'Opportunités.</h2>
+                        </div>
+                        <div class="section-intro">
+                            Ces véhicules d'investissement permettent de regrouper des capitaux pour cibler des actifs
+                            spécifiques, souvent inaccessibles individuellement.
+                        </div>
+                    </div>
+                    <div class="feature-layout inverted">
+                        <div class="section-text">
+                            <p>
+                                Pour les investisseurs qui recherchent une exposition diversifiée avec une gestion
+                                active. Ces structures fermées permettent à Asset Holding de déployer des stratégies
+                                d'investissement complexes sur des marchés ciblés.
+                            </p>
+                            <p>
+                                Nous assurons la cohésion du groupe et la stratégie de déploiement, basée sur des
+                                critères stricts de sélection et un alignement total des intérêts de tous les
+                                participants. Le suivi est régulier et transparent.
+                            </p>
+                        </div>
+                        <div class="feature-box">
+                            <h3>Cadre d'application</h3>
+                            <ul class="feature-list">
+                                <li>Structures d'investissement à capital fermé.</li>
+                                <li>Ouvert uniquement aux investisseurs qualifiés.</li>
+                                <li>Stratégie d'acquisition et de sortie prédéfinie.</li>
+                                <li>Optimisation des coûts de transaction grâce à l'effet de taille.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="private-detail">
+                <div class="container">
+                    <div class="section-header">
+                        <div>
+                            <div class="section-kicker">Segment de Détail</div>
+                            <h2 class="section-title">Gestion Privée Sur Mesure : Stratégie Personnalisée.</h2>
+                        </div>
+                        <div class="section-intro">
+                            Nous adressons les besoins complexes des familles, des bureaux familiaux et des
+                            investisseurs ultra-nets avec des solutions uniques.
+                        </div>
+                    </div>
+                    <div class="feature-layout">
+                        <div class="section-text">
+                            <p>
+                                Contrairement aux produits standards, nos mandats privés sont des feuilles de route
+                                uniques, intégrant l'environnement fiscal (notamment en lien avec la Suisse), la
+                                planification successorale et les exigences de liquidité propres à chaque patrimoine.
+                            </p>
+                            <p>
+                                L'objectif est d'optimiser la croissance et d'assurer la transmission du patrimoine dans
+                                un cadre sécurisé et professionnel. L'approche est holistique, couvrant les actifs
+                                financiers et réels.
+                            </p>
+                        </div>
+                        <div class="feature-box">
+                            <h3>Notre engagement</h3>
+                            <ul class="feature-list">
+                                <li>Approche holistique (patrimoine, fiscalité, succession).</li>
+                                <li>Intégration d'experts juridiques en Suisse.</li>
+                                <li>Rapports de performance adaptés aux contraintes du Family Office.</li>
+                                <li>Confidentialité et discrétion absolues.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="equity-detail">
+                <div class="container">
+                    <div class="section-header">
+                        <div>
+                            <div class="section-kicker">Segment de Détail</div>
+                            <h2 class="section-title">Investissement en Capital : Prises de Participations Actives.</h2>
+                        </div>
+                        <div class="section-intro">
+                            Asset Holding identifie des opportunités d'investissement en fonds propres dans des projets
+                            à fort potentiel ou des sociétés non cotées.
+                        </div>
+                    </div>
+                    <div class="feature-layout inverted">
+                        <div class="section-text">
+                            <p>
+                                Notre approche est celle d'un partenaire stratégique, impliqué dans la gouvernance et la
+                                création de valeur de la société ou du projet. Nous ne sommes pas des investisseurs
+                                passifs, mais des facilitateurs de croissance.
+                            </p>
+                            <p>
+                                Chaque prise de participation est structurée avec une vision claire de l'horizon de
+                                sortie et des mécanismes de protection du capital (droit de regard, gouvernance
+                                structurée). Nous investissons là où nous pouvons impacter positivement la performance.
+                            </p>
+                        </div>
+                        <div class="feature-box">
+                            <h3>Critères clés</h3>
+                            <ul class="feature-list">
+                                <li>Potentiel de croissance élevé.</li>
+                                <li>Gouvernance structurée et alignée.</li>
+                                <li>Mécanismes de protection du capital investisseur.</li>
+                                <li>Stratégie de sortie définie à moyen/long terme.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="loan-detail">
+                <div class="container">
+                    <div class="section-header">
+                        <div>
+                            <div class="section-kicker">Segment de Détail</div>
+                            <h2 class="section-title">Structures de Dette et Financement Structuré.</h2>
+                        </div>
+                        <div class="section-intro">
+                            Nous concevons des solutions de financement adaptées aux besoins spécifiques de nos projets
+                            ou de ceux de nos partenaires.
+                        </div>
+                    </div>
+                    <div class="feature-layout">
+                        <div class="section-text">
+                            <p>
+                                Ces montages financiers peuvent aller du prêt senior sécurisé aux financements mezzanine
+                                plus flexibles. La dette est un outil essentiel pour optimiser le rendement du capital
+                                propre, et nos structures sont méticuleusement calibrées.
+                            </p>
+                            <p>
+                                Les termes du financement (covenants, garanties, collatéraux) sont spécifiquement
+                                négociés par notre équipe en Suisse pour minimiser le risque de défaut et sécuriser le
+                                capital prêté contre les flux de trésorerie du projet.
+                            </p>
+                        </div>
+                        <div class="feature-box">
+                            <h3>Types de financement</h3>
+                            <ul class="feature-list">
+                                <li>Prêts Senior et sécurisés.</li>
+                                <li>Financements Mezzanine flexibles.</li>
+                                <li>Prêts 'Bridge' pour les besoins de liquidité à court terme.</li>
+                                <li>Garanties et sûretés sur actifs immobiliers ou réels.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="realestate-detail">
+                <div class="container">
+                    <div class="section-header">
+                        <div>
+                            <div class="section-kicker">Segment de Détail</div>
+                            <h2 class="section-title">Actifs Immobiliers Réels : Valeur et Développement.</h2>
+                        </div>
+                        <div class="section-intro">
+                            Notre expertise historique repose sur l'immobilier, couvrant l'acquisition, le développement
+                            de projets complexes, et la gestion d'actifs à long terme.
+                        </div>
+                    </div>
+                    <div class="feature-layout inverted">
+                        <div class="section-text">
+                            <p>
+                                Nous privilégions les marchés où les fondamentaux (démographie, économie) justifient une
+                                valorisation pérenne. Nous nous concentrons sur la création de valeur tangible via le
+                                développement ou le repositionnement stratégique d'actifs.
+                            </p>
+                            <p>
+                                Nous ne sommes pas des spéculateurs, mais des constructeurs de valeur immobilière.
+                                Chaque actif doit présenter un business plan robuste et une résilience face aux cycles
+                                économiques.
+                            </p>
+                        </div>
+                        <div class="feature-box">
+                            <h3>Domaines d'intervention</h3>
+                            <ul class="feature-list">
+                                <li>Développement de projets résidentiels et commerciaux.</li>
+                                <li>Repositionnement d'actifs existants (Value-add).</li>
+                                <li>Détention d'actifs générant des revenus stables.</li>
+                                <li>Analyse approfondie du marché avant tout engagement.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="marketing-detail">
+                <div class="container">
+                    <div class="section-header">
+                        <div>
+                            <div class="section-kicker">Segment de Détail</div>
+                            <h2 class="section-title">Conseil Stratégique et Positionnement de Projets.</h2>
+                        </div>
+                        <div class="section-intro">
+                            Ce service va au-delà du simple conseil. Nous aidons les porteurs de projets à affiner leur
+                            proposition d'investissement et à attirer les capitaux.
+                        </div>
+                    </div>
+                    <div class="feature-layout">
+                        <div class="section-text">
+                            <p>
+                                Asset Holding soutient les promoteurs et les sponsors en amont de leurs opérations. Cela
+                                inclut l'aide à la structuration des véhicules juridiques et financiers, la modélisation
+                                économique et la création de documentation professionnelle.
+                            </p>
+                            <p>
+                                Notre réseau nous permet d'assurer une levée de fonds ciblée et efficace, en
+                                positionnant l'offre auprès d'investisseurs dont le profil correspond aux besoins du
+                                projet (le "Marketing" ciblé de l'opération).
+                            </p>
+                        </div>
+                        <div class="feature-box">
+                            <h3>Services Clés</h3>
+                            <ul class="feature-list">
+                                <li>Audit de la structure juridique et fiscale du projet.</li>
+                                <li>Élaboration de la documentation d'investissement (IM, pitchs).</li>
+                                <li>Assistance à la négociation des Term Sheets.</li>
+                                <li>Mise en relation ciblée pour la levée de capitaux.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="team">
+                <div class="container">
+                    <div class="section-header">
+                        <div>
+                            <div class="section-kicker">Team</div>
+                            <h2 class="section-title">A compact team with direct access.</h2>
+                        </div>
+                        <div class="section-intro">
+                            Pas de strates inutiles, pas de centres d'appel. Les clients traitent directement avec les
+                            décideurs.
+                        </div>
+                    </div>
+                    <div class="team-grid">
+                        <div class="team-card">
+                            <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=600&q=80"
+                                alt="Team member" class="team-photo" />
+                            <div class="team-role">Founder · CFO</div>
+                            <div class="team-name">Jerry Vishal</div>
+                            <div class="team-focus">
+                                Structuration, négociations complexes et déploiement stratégique du capital dans
+                                l'immobilier et les transactions privées.
+                            </div>
+                            <div class="team-tagline">
+                                Contact principal pour les investisseurs et les partenaires ; supervise le risque, les
+                                rendements et l'allocation d'actifs.
+                            </div>
+                        </div>
+                        <div class="team-card">
+                            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80"
+                                alt="Team member" class="team-photo" />
+                            <div class="team-role">Advisory & Legal</div>
+                            <div class="team-name">External partners</div>
+                            <div class="team-focus">
+                                Réseau d'avocats, fiscalistes et notaires en Suisse, Suisse et autres juridictions
+                                internationales.
+                            </div>
+                            <div class="team-tagline">
+                                Mobilisés en fonction de chaque transaction, pour garantir la solidité de la
+                                documentation et la conformité légale.
+                            </div>
+                        </div>
+                        <div class="team-card">
+                            <img src="https://images.unsplash.com/photo-1525134479668-1bee5c7c6845?auto=format&fit=crop&w=600&q=80"
+                                alt="Team member" class="team-photo" />
+                            <div class="team-role">Operations & Analysis</div>
+                            <div class="team-name">Analyst / Operations</div>
+                            <div class="team-focus">
+                                Modélisation financière, analyse de scénarios, projections de flux de trésorerie et
+                                suivi opérationnel continu.
+                            </div>
+                            <div class="team-tagline">
+                                Assure la discipline dans l'exécution et le monitoring constant des transactions et des
+                                structures d'investissement.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="proposal">
+                <div class="container">
+                    <div class="section-header">
+                        <div>
+                            <div class="section-kicker">Proposal investing</div>
+                            <h2 class="section-title">How we work with potential investors.</h2>
+                        </div>
+                        <div class="section-intro">
+                            We treat every new relationship as a long-term partnership, not a one-shot transaction.
+                        </div>
+                    </div>
+                    <div class="feature-layout">
+                        <div class="section-text">
+                            <p>
+                                Avant de proposer un investissement, nous prenons le temps de comprendre le profil de
+                                l'investisseur :
+                                l'origine de son patrimoine, son appétit pour le risque, l'horizon temporel, les
+                                attentes et les contraintes.
+                            </p>
+                            <p>
+                                Nous structurons ensuite une proposition qui peut inclure une ou plusieurs stratégies
+                                (prêt, capital, co-investissement, exposition immobilière, etc.), toujours avec une
+                                logique risque/rendement claire et des scénarios documentés.
+                            </p>
+                            <p>
+                                Une fois l'alignement trouvé, nous formalisons les conditions dans un cadre limpide
+                                (Term Sheet, accord,
+                                garanties) et seulement après cela, nous passons à l'exécution.
+                            </p>
+                            <div class="pill-list">
+                                <span class="pill-soft">Profile & objectives</span>
+                                <span class="pill-soft">Scenario analysis</span>
+                                <span class="pill-soft">Structured term sheet</span>
+                                <span class="pill-soft">Execution & reporting</span>
+                            </div>
+                        </div>
+                        <div class="feature-box">
+                            <h3>Submit an investment proposal</h3>
+                            <p>
+                                Si vous avez un projet ou des capitaux à déployer, vous pouvez partager un bref aperçu
+                                incluant :
+                            </p>
+                            <ul class="feature-list">
+                                <li>Type de projet ou idée d'investissement</li>
+                                <li>Montant et calendrier requis (tranches, horizon)</li>
+                                <li>Localisation, structure et garanties (si applicable)</li>
+                                <li>Coordonnées et moyen de communication préféré</li>
+                            </ul>
+                            <p class="note">
+                                Vous pouvez envoyer un résumé initial par email ; nous vous recontacterons uniquement si
+                                l'opportunité
+                                correspond à nos critères et à nos priorités actuelles.
+                            </p>
+                            <button class="btn btn-primary" style="margin-top:8px;">
+                                Request an initial call
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="client-area">
+                <div class="container">
+                    <div class="section-header">
+                        <div>
+                            <div class="section-kicker">Client area</div>
+                            <h2 class="section-title">A discreet, by-invitation environment.</h2>
+                        </div>
+                        <div class="section-intro">
+                            Reserved for existing clients and selected partners under signed agreements.
+                        </div>
+                    </div>
+                    <div class="feature-layout">
+                        <div class="section-text">
+                            <p>
+                                L'espace client n'est pas une plateforme publique. L'accès est accordé manuellement aux
+                                clients avec
+                                des mandats actifs ou des transactions en cours. Il peut contenir :
+                            </p>
+                            <ul class="feature-list">
+                                <li>Confidential documentation et contrats</li>
+                                <li>Rapports, relevés et notes de suivi</li>
+                                <li>Documents spécifiques au projet, calendriers et mises à jour</li>
+                            </ul>
+                            <p class="note">
+                                Pour des raisons de sécurité et de confidentialité, les détails d'accès sont communiqués
+                                directement par notre équipe,
+                                et non via une inscription en ligne.
+                            </p>
+                        </div>
+                        <div class="feature-box">
+                            <h3>Existing client?</h3>
+                            <p>
+                                Si vous êtes déjà client et que vous avez besoin d'un accès ou d'assistance concernant
+                                vos documents ou
+                                rapports, veuillez nous contacter directement.
+                            </p>
+                            <button class="btn btn-outline" style="margin-top:8px;">
+                                Contact for client access
+                            </button>
+                            <p class="note">
+                                For compliance reasons, we never send login details or sensitive documents over
+                                unsecured channels.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact">
+                <div class="container">
+                    <div class="section-header">
+                        <div>
+                            <div class="section-kicker">Contact</div>
+                            <h2 class="section-title">Let’s explore your next step.</h2>
+                        </div>
+                        <div class="section-intro">
+                            Nous préférons les conversations directes et claires. Un appel court est souvent plus
+                            efficace qu'un long échange d'e-mails.
+                        </div>
+                    </div>
+                    <div class="contact">
+                        <div>
+                            <h3>Asset Holding S.A.</h3>
+                            <div class="contact-details">
+                                <p><span>Address:</span> 1, rue de Muehlenbach, 2168 Suisse, Suisse</p>
+                                <p><span>Email:</span> info@beta-concept.com</p>
+                                <p><span>Jurisdiction:</span> Suisse</p>
+                            </div>
+                        </div>
+                        <div class="contact-cta">
+                            <button class="btn btn-primary">Request an initial call</button>
+                            <small>
+                                Nous répondons généralement dans les 24 heures. Confidentialité assurée.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Donation Section -->
+            <section id="donation" class="donation-section">
+                <div class="container">
+                    <div class="section-header">
+                        <div class="section-kicker">Support Us</div>
+                        <h2 class="section-title">Donation</h2>
+                        <p class="section-intro">
+                            Support the development of Asset Holding by sending a contribution to one of the addresses
+                            below.
+                        </p>
+                    </div>
+
+                    <div class="donation-grid">
+                        <div class="donation-card donation-card-iban">
+                            <h3 class="donation-label">IBAN</h3>
+                            <div class="donation-row">
+                                <span class="donation-address">LU720109165346779368</span>
+                                <button type="button" class="donation-copy-btn" data-address="LU720109165346779368"
+                                    aria-label="Copy IBAN">
+                                    <span class="copy-icon"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="donation-card">
+                            <h3 class="donation-label">Bitcoin (BTC)</h3>
+                            <div class="donation-row">
+                                <span class="donation-address">bc1qlvjq0jz7dg9c22ry37km4lr4qgl6kr5shyv97f</span>
+                                <button type="button" class="donation-copy-btn"
+                                    data-address="bc1qlvjq0jz7dg9c22ry37km4lr4qgl6kr5shyv97f"
+                                    aria-label="Copy Bitcoin address">
+                                    <span class="copy-icon"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="donation-card">
+                            <h3 class="donation-label">Ethereum (ETH)</h3>
+                            <div class="donation-row">
+                                <span class="donation-address">0x85A93c354ab70a37471847d769aB794b22C5A8bf</span>
+                                <button type="button" class="donation-copy-btn"
+                                    data-address="0x85A93c354ab70a37471847d769aB794b22C5A8bf"
+                                    aria-label="Copy Ethereum address">
+                                    <span class="copy-icon"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <style>
+                .donation-section {
+                    padding: 60px 0;
+                    margin-top: 60px;
+                }
+
+                .donation-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                    gap: 20px;
+                    max-width: 700px;
+                    margin: 30px auto 0;
+                }
+
+                .donation-card-iban {
+                    grid-column: 1 / -1;
+                }
+
+                .donation-card {
+                    background: rgba(17, 21, 39, 0.7);
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(245, 199, 106, 0.2);
+                    border-radius: 12px;
+                    padding: 24px;
+                    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+                    text-align: center;
+                    transition: all 0.3s ease;
+                }
+
+                .donation-card:hover {
+                    border-color: rgba(245, 199, 106, 0.4);
+                    box-shadow: 0 12px 30px rgba(245, 199, 106, 0.15);
+                    transform: translateY(-2px);
+                }
+
+                .donation-label {
+                    font-size: 1.1rem;
+                    font-weight: 600;
+                    color: #f5c76a;
+                    margin-bottom: 12px;
+                    text-align: center;
+                }
+
+                .donation-row {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 12px;
+                }
+
+                .donation-address {
+                    font-family: 'Courier New', monospace;
+                    font-size: 0.9rem;
+                    word-break: break-all;
+                    flex: 1 1 auto;
+                    padding: 10px 14px;
+                    border-radius: 8px;
+                    background: rgba(9, 12, 30, 0.8);
+                    color: #e5e5e5;
+                    border: 1px solid rgba(245, 199, 106, 0.1);
+                }
+
+                .donation-copy-btn {
+                    flex: 0 0 auto;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    border: none;
+                    cursor: pointer;
+                    background: radial-gradient(circle at 20% 0, #ffe8a6, #f5c76a);
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 4px 12px rgba(245, 199, 106, 0.3);
+                }
+
+                .donation-copy-btn:hover {
+                    transform: scale(1.1);
+                    box-shadow: 0 6px 16px rgba(245, 199, 106, 0.5);
+                }
+
+                .donation-copy-btn:active {
+                    transform: scale(0.95);
+                }
+
+                .copy-icon {
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 3px;
+                    border: 2px solid #181818;
+                    position: relative;
+                }
+
+                .copy-icon::before {
+                    content: "";
+                    position: absolute;
+                    top: -4px;
+                    left: 4px;
+                    width: 80%;
+                    height: 80%;
+                    border-radius: 3px;
+                    border: 2px solid #181818;
+                    background: transparent;
+                }
+
+                .donation-copy-btn.donation-copy-success {
+                    background: #4caf50;
+                    box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.3);
+                }
+
+                .donation-copy-btn.donation-copy-success .copy-icon,
+                .donation-copy-btn.donation-copy-success .copy-icon::before {
+                    border-color: #fff;
+                }
+
+                @media (max-width: 768px) {
+                    .donation-grid {
+                        grid-template-columns: 1fr;
+                        max-width: none;
+                    }
+
+                    .donation-card-iban {
+                        grid-column: auto;
+                    }
+
+                    .donation-address {
+                        font-size: 0.8rem;
+                        padding: 8px 10px;
+                    }
+                }
+
+                @media (max-width: 640px) {
+                    .donation-section {
+                        padding: 40px 0;
+                        margin-top: 40px;
+                    }
+
+                    .donation-card {
+                        padding: 18px;
+                    }
+
+                    .donation-label {
+                        font-size: 1rem;
+                    }
+
+                    .donation-address {
+                        font-size: 0.75rem;
+                    }
+
+                    .donation-copy-btn {
+                        width: 36px;
+                        height: 36px;
+                    }
+                }
+            </style>
+
+            <script>
+                // Donation copy functionality
+                document.addEventListener('DOMContentLoaded', function () {
+                    const copyButtons = document.querySelectorAll('.donation-copy-btn');
+
+                    copyButtons.forEach(button => {
+                        button.addEventListener('click', async function () {
+                            const address = this.getAttribute('data-address');
+
+                            try {
+                                await navigator.clipboard.writeText(address);
+
+                                // Visual feedback
+                                this.classList.add('donation-copy-success');
+
+                                setTimeout(() => {
+                                    this.classList.remove('donation-copy-success');
+                                }, 2000);
+                            } catch (err) {
+                                console.error('Failed to copy:', err);
+                                // Fallback for older browsers
+                                const textArea = document.createElement('textarea');
+                                textArea.value = address;
+                                textArea.style.position = 'fixed';
+                                textArea.style.opacity = '0';
+                                document.body.appendChild(textArea);
+                                textArea.select();
+                                try {
+                                    document.execCommand('copy');
+                                    this.classList.add('donation-copy-success');
+                                    setTimeout(() => {
+                                        this.classList.remove('donation-copy-success');
+                                    }, 2000);
+                                } catch (err2) {
+                                    console.error('Fallback copy failed:', err2);
+                                }
+                                document.body.removeChild(textArea);
+                            }
+                        });
+                    });
+                });
+            </script>
+
         </main>
 
         <footer>
             <div class="container">
                 <div class="footer-row">
-                    <p>© 2025 Asset Holding. All rights reserved.</p>
+                    <div>
+                        &copy; 2024 Asset Holding. All rights reserved.
+                    </div>
+                    <div class="footer-links">
+                        <a href="#story">Our Story</a>
+                        <a href="#mission">Our Mission</a>
+                        <a href="#contact">Contact Us</a>
+                        <a href="/privacy-cookie-policy">Privacy & Cookies</a>
+                    </div>
                 </div>
             </div>
         </footer>
     </div>
-
-    <script src="../../auth.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const loginSection = document.getElementById('login-section');
-            const dashboardContent = document.getElementById('dashboard-content');
-            const loginForm = document.getElementById('login-form');
-            const loginError = document.getElementById('login-error');
-            const loginBtn = document.getElementById('login-btn');
-            const logoutCard = document.getElementById('logout-card');
-
-            function checkAuth() {
-                if (window.AssetAuth && window.AssetAuth.isLoggedIn()) {
-                    showDashboard(window.AssetAuth.getCurrentUser());
-                } else {
-                    showLoginSection();
-                }
-            }
-
-            function showLoginSection() {
-                loginSection.style.display = 'block';
-                dashboardContent.style.display = 'none';
-            }
-
-            function showDashboard(user) {
-                loginSection.style.display = 'none';
-                dashboardContent.style.display = 'block';
-            }
-
-            if (loginForm) {
-                loginForm.addEventListener('submit', async function (e) {
-                    e.preventDefault();
-                    const email = document.getElementById('login-email').value.trim();
-                    const password = document.getElementById('login-password').value;
-
-                    loginError.style.display = 'none';
-                    loginBtn.disabled = true;
-                    loginBtn.textContent = 'Logging in...';
-
-                    try {
-                        const result = await window.AssetAuth.login(email, password);
-                        if (result.success) {
-                            showDashboard(result.user);
-                        } else {
-                            loginError.textContent = result.message || 'Invalid credentials.';
-                            loginError.style.display = 'block';
-                        }
-                    } catch (error) {
-                        loginError.textContent = 'An error occurred. Please try again.';
-                        loginError.style.display = 'block';
-                    } finally {
-                        loginBtn.disabled = false;
-                        loginBtn.textContent = 'Login';
-                    }
-                });
-            }
-
-            if (logoutCard) {
-                logoutCard.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    if (window.AssetAuth) {
-                        window.AssetAuth.logout();
-                    }
-                });
-            }
-
-            setTimeout(checkAuth, 100);
-        });
-    </script>
 </body>
 
 </html>

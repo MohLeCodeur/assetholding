@@ -1009,9 +1009,165 @@
                 display: flex;
                 align-items: center;
             }
+        }
 
-            .mini-card {
-                min-height: 60px;
+        .mini-card {
+            min-height: 60px;
+        }
+
+        /* Donation Section Styles */
+        .donation-section {
+            padding: 60px 0;
+            margin-top: 60px;
+        }
+
+        .donation-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+            max-width: 700px;
+            margin: 30px auto 0;
+        }
+
+        .donation-card-iban {
+            grid-column: 1 / -1;
+        }
+
+        .donation-card {
+            background: rgba(17, 21, 39, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(245, 199, 106, 0.2);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .donation-card:hover {
+            border-color: rgba(245, 199, 106, 0.4);
+            box-shadow: 0 12px 30px rgba(245, 199, 106, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .donation-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f5c76a;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .donation-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .donation-address {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            word-break: break-all;
+            flex: 1 1 auto;
+            padding: 10px 14px;
+            border-radius: 8px;
+            background: rgba(9, 12, 30, 0.8);
+            color: #e5e5e5;
+            border: 1px solid rgba(245, 199, 106, 0.1);
+        }
+
+        .donation-copy-btn {
+            flex: 0 0 auto;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            background: radial-gradient(circle at 20% 0, #ffe8a6, #f5c76a);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(245, 199, 106, 0.3);
+        }
+
+        .donation-copy-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(245, 199, 106, 0.5);
+        }
+
+        .donation-copy-btn:active {
+            transform: scale(0.95);
+        }
+
+        .copy-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            border: 2px solid #181818;
+            position: relative;
+        }
+
+        .copy-icon::before {
+            content: "";
+            position: absolute;
+            top: -4px;
+            left: 4px;
+            width: 80%;
+            height: 80%;
+            border-radius: 3px;
+            border: 2px solid #181818;
+            background: transparent;
+        }
+
+        .donation-copy-btn.donation-copy-success {
+            background: #4caf50;
+            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.3);
+        }
+
+        .donation-copy-btn.donation-copy-success .copy-icon,
+        .donation-copy-btn.donation-copy-success .copy-icon::before {
+            border-color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .donation-grid {
+                grid-template-columns: 1fr;
+                max-width: none;
+            }
+
+            .donation-card-iban {
+                grid-column: auto;
+            }
+
+            .donation-address {
+                font-size: 0.8rem;
+                padding: 8px 10px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .donation-section {
+                padding: 40px 0;
+                margin-top: 40px;
+            }
+
+            .donation-card {
+                padding: 18px;
+            }
+
+            .donation-label {
+                font-size: 1rem;
+            }
+
+            .donation-address {
+                font-size: 0.75rem;
+            }
+
+            .donation-copy-btn {
+                width: 36px;
+                height: 36px;
             }
         }
     </style>
@@ -1034,6 +1190,7 @@
                         <a href="#mission">Our Mission</a>
                         <a href="#segments">Segments</a>
                         <a href="#team">Team</a>
+                        <a href="#donation">Donation</a>
                         <a href="#contact">Contact</a>
                     </nav>
                     <div class="nav-cta">
@@ -1641,6 +1798,59 @@
                 </div>
             </section>
 
+            <!-- Donation Section -->
+            <section id="donation" class="donation-section">
+                <div class="container">
+                    <div class="section-header">
+                        <div>
+                            <div class="section-kicker">Support Us</div>
+                            <h2 class="section-title">Donation</h2>
+                        </div>
+                        <div class="section-intro">
+                            Support the development of Asset Holding by sending a contribution to one of the addresses
+                            below.
+                        </div>
+                    </div>
+
+                    <div class="donation-grid">
+                        <div class="donation-card donation-card-iban">
+                            <h3 class="donation-label">IBAN</h3>
+                            <div class="donation-row">
+                                <span class="donation-address">LU720109165346779368</span>
+                                <button type="button" class="donation-copy-btn donation-copy-btn-iban"
+                                    data-address="LU720109165346779368" aria-label="Copy IBAN">
+                                    <span class="copy-icon"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="donation-card">
+                            <h3 class="donation-label">Bitcoin (BTC)</h3>
+                            <div class="donation-row">
+                                <span class="donation-address">bc1qlvjq0jz7dg9c22ry37km4lr4qgl6kr5shyv97f</span>
+                                <button type="button" class="donation-copy-btn donation-copy-btn-btc"
+                                    data-address="bc1qlvjq0jz7dg9c22ry37km4lr4qgl6kr5shyv97f"
+                                    aria-label="Copy Bitcoin address">
+                                    <span class="copy-icon"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="donation-card">
+                            <h3 class="donation-label">Ethereum (ETH)</h3>
+                            <div class="donation-row">
+                                <span class="donation-address">0x85A93c354ab70a37471847d769aB794b22C5A8bf</span>
+                                <button type="button" class="donation-copy-btn donation-copy-btn-eth"
+                                    data-address="0x85A93c354ab70a37471847d769aB794b22C5A8bf"
+                                    aria-label="Copy Ethereum address">
+                                    <span class="copy-icon"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <section id="contact">
                 <div class="container">
                     <div class="section-header">
@@ -1674,6 +1884,7 @@
 
         </main>
 
+
         <footer>
             <div class="container">
                 <div class="footer-row">
@@ -1690,6 +1901,49 @@
             </div>
         </footer>
     </div>
+
+    <script>
+        // Donation copy functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const copyButtons = document.querySelectorAll('.donation-copy-btn');
+
+            copyButtons.forEach(button => {
+                button.addEventListener('click', async function () {
+                    const address = this.getAttribute('data-address');
+
+                    try {
+                        await navigator.clipboard.writeText(address);
+
+                        // Visual feedback
+                        this.classList.add('donation-copy-success');
+
+                        setTimeout(() => {
+                            this.classList.remove('donation-copy-success');
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Failed to copy:', err);
+                        // Fallback for older browsers
+                        const textArea = document.createElement('textarea');
+                        textArea.value = address;
+                        textArea.style.position = 'fixed';
+                        textArea.style.opacity = '0';
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            this.classList.add('donation-copy-success');
+                            setTimeout(() => {
+                                this.classList.remove('donation-copy-success');
+                            }, 2000);
+                        } catch (err2) {
+                            console.error('Fallback copy failed:', err2);
+                        }
+                        document.body.removeChild(textArea);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
