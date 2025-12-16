@@ -338,7 +338,6 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Content</th>
                                     <th>Type</th>
                                     <th>Submitted At</th>
@@ -352,12 +351,11 @@
                         const date = new Date(item.created_at);
                         tableHTML += `
                             <tr>
-                                <td>${item.id}</td>
                                 <td class="content-cell" title="${item.content}">${item.content}</td>
                                 <td>${item.content_type || 'text'}</td>
                                 <td class="timestamp">${date.toLocaleString()}</td>
                                 <td>
-                                    <button class="delete-btn" onclick="deleteItem(${item.id})">Delete</button>
+                                    <button class="delete-btn" onclick="deleteItem('${item.id}')">Delete</button>
                                 </td>
                             </tr>
                         `;
