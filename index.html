@@ -628,6 +628,7 @@
             color: var(--accent-strong);
         }
 
+        /* Tablet and below */
         @media (max-width: 880px) {
 
             .hero-grid,
@@ -659,6 +660,358 @@
             .contact-cta {
                 align-items: flex-start;
                 text-align: left;
+            }
+
+            .grid-3 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            /* Navigation mobile */
+            .nav {
+                padding: 12px 0;
+                gap: 12px;
+            }
+
+            .logo img {
+                width: 32px;
+                height: 32px;
+            }
+
+            .logo-text span:first-child {
+                font-size: 10px;
+            }
+
+            .logo-text span:last-child {
+                font-size: 11px;
+            }
+
+            .nav-cta {
+                gap: 8px;
+            }
+
+            .btn {
+                padding: 7px 12px;
+                font-size: 12px;
+                gap: 4px;
+            }
+
+            /* Hero section mobile */
+            .hero {
+                padding: 24px 0 32px;
+            }
+
+            .hero-grid {
+                gap: 24px;
+            }
+
+            .eyebrow {
+                font-size: 10px;
+                margin-bottom: 8px;
+            }
+
+            .headline {
+                font-size: clamp(24px, 7vw, 32px);
+                line-height: 1.15;
+                margin-bottom: 14px;
+            }
+
+            .hero-text {
+                font-size: 13px;
+                margin-bottom: 18px;
+            }
+
+            .hero-badges {
+                gap: 8px;
+                margin-bottom: 18px;
+            }
+
+            .badge {
+                font-size: 10px;
+                padding: 3px 8px;
+            }
+
+            .hero-actions {
+                gap: 10px;
+                margin-bottom: 8px;
+            }
+
+            .hero-actions .btn {
+                flex: 1;
+                justify-content: center;
+                min-width: 0;
+            }
+
+            .hero-note {
+                font-size: 10px;
+            }
+
+            .hero-card {
+                padding: 14px 14px 12px;
+                gap: 10px;
+            }
+
+            .hero-card-tag {
+                font-size: 10px;
+            }
+
+            .hero-card-figure {
+                font-size: 18px;
+            }
+
+            .hero-card-sub {
+                font-size: 10px;
+                max-width: 100%;
+            }
+
+            .hero-card-pills {
+                gap: 6px;
+                font-size: 9px;
+            }
+
+            .pill {
+                padding: 2px 7px;
+            }
+
+            /* Sections mobile */
+            section {
+                padding: 24px 0;
+            }
+
+            .section-header {
+                margin-bottom: 14px;
+                gap: 10px;
+            }
+
+            .section-kicker {
+                font-size: 10px;
+            }
+
+            .section-title {
+                font-size: 16px;
+            }
+
+            .section-intro {
+                font-size: 11px;
+            }
+
+            .twocol {
+                gap: 16px;
+            }
+
+            .section-text {
+                font-size: 12px;
+            }
+
+            .section-card {
+                padding: 12px 12px 10px;
+                font-size: 11px;
+            }
+
+            .pill-list {
+                gap: 6px;
+                margin-top: 8px;
+            }
+
+            .pill-soft {
+                font-size: 10px;
+                padding: 3px 8px;
+            }
+
+            /* Grid adjustments for mobile */
+            .grid-3 {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 12px;
+            }
+
+            .mini-card {
+                padding: 12px 12px 10px;
+                font-size: 11px;
+            }
+
+            .mini-card-title {
+                font-size: 11px;
+                margin-bottom: 3px;
+            }
+
+            .mini-card-text {
+                font-size: 10px;
+            }
+
+            /* Team section mobile */
+            .team-grid {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 14px;
+            }
+
+            .team-card {
+                padding: 12px 12px 10px;
+                font-size: 11px;
+            }
+
+            .team-photo {
+                max-height: 220px;
+                margin-bottom: 10px;
+            }
+
+            .team-role {
+                font-size: 10px;
+                margin-bottom: 3px;
+            }
+
+            .team-name {
+                font-size: 12px;
+                margin-bottom: 3px;
+            }
+
+            .team-focus {
+                font-size: 11px;
+                margin-bottom: 5px;
+            }
+
+            .team-tagline {
+                font-size: 10px;
+            }
+
+            /* Feature layouts mobile */
+            .feature-layout {
+                gap: 16px;
+            }
+
+            .feature-box {
+                padding: 14px 14px 12px;
+                font-size: 11px;
+            }
+
+            .feature-box h3 {
+                font-size: 13px;
+                margin-bottom: 6px;
+            }
+
+            .feature-list {
+                margin-top: 6px;
+                padding-left: 14px;
+                font-size: 11px;
+            }
+
+            .feature-list li+li {
+                margin-top: 3px;
+            }
+
+            .note {
+                font-size: 10px;
+                margin-top: 6px;
+            }
+
+            /* Contact section mobile */
+            .contact {
+                padding: 14px 14px 12px;
+                margin-top: 10px;
+                gap: 14px;
+                font-size: 11px;
+            }
+
+            .contact h3 {
+                font-size: 13px;
+                margin-bottom: 5px;
+            }
+
+            .contact-details p {
+                margin-bottom: 3px;
+                font-size: 11px;
+            }
+
+            .contact-cta small {
+                font-size: 10px;
+            }
+
+            /* Footer mobile */
+            footer {
+                padding: 12px 0 16px;
+                font-size: 10px;
+            }
+
+            .footer-row {
+                gap: 8px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-links {
+                gap: 8px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* Extra small mobile devices */
+        @media (max-width: 375px) {
+            .container {
+                padding: 0 14px;
+            }
+
+            .headline {
+                font-size: 22px;
+            }
+
+            .hero-text {
+                font-size: 12px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .hero-actions .btn {
+                width: 100%;
+            }
+
+            .btn {
+                padding: 8px 14px;
+                font-size: 11px;
+            }
+
+            .section-title {
+                font-size: 15px;
+            }
+
+            .nav-cta {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .nav-cta .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Improve touch targets for mobile */
+        @media (hover: none) and (pointer: coarse) {
+            .btn {
+                min-height: 44px;
+                padding: 10px 16px;
+            }
+
+            .nav-links a {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+
+            .mini-card {
+                min-height: 60px;
             }
         }
     </style>
