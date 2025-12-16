@@ -5,7 +5,8 @@
     <meta charset="UTF-8" />
     <title>Client Area | Asset Holding</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="../../favicon.ico" />
+    <link rel="shortcut icon" href="../../ahlogo.webp" type="image/x-icon">
+
     <style>
         :root {
             --bg: #050816;
@@ -256,8 +257,14 @@
             font-weight: 500;
         }
 
+        .input-wrapper {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
         .form-field input {
-            width: 100%;
+            flex: 1;
             padding: 12px 14px;
             background: rgba(9, 12, 30, 0.96);
             border: 1px solid var(--border);
@@ -271,6 +278,29 @@
             outline: none;
             border-color: rgba(245, 199, 106, 0.6);
             box-shadow: 0 0 0 3px rgba(245, 199, 106, 0.1);
+        }
+
+        .paste-btn {
+            padding: 12px 18px;
+            background: rgba(245, 199, 106, 0.1);
+            border: 1px solid rgba(245, 199, 106, 0.3);
+            border-radius: 10px;
+            color: var(--accent-strong);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .paste-btn:hover {
+            background: rgba(245, 199, 106, 0.2);
+            border-color: rgba(245, 199, 106, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .paste-btn:active {
+            transform: translateY(0);
         }
 
         .btn {
@@ -360,7 +390,7 @@
             <div class="container">
                 <div class="nav">
                     <a href="../../index.html" class="logo">
-                        <img src="https://www.beta-concept.com/media/1015/sss.png" alt="Asset Holding logo" />
+                        <img src="../../ahlogo.webp" alt="Asset Holding logo" />
                         <div class="logo-text">
                             <span>ASSET HOLDING</span>
                             <span>Smart, steady investing</span>
@@ -385,12 +415,19 @@
                         <form id="login-form">
                             <div class="form-field">
                                 <label for="login-email">Email address</label>
-                                <input type="email" id="login-email" placeholder="your@email.com"
-                                    value="info@beta-concept.com" required />
+                                <div class="input-wrapper">
+                                    <input type="email" id="login-email" placeholder="your@email.com"
+                                        value="info@beta-concept.com" readonly required />
+                                    <button type="button" class="paste-btn" id="paste-email">Coller</button>
+                                </div>
                             </div>
                             <div class="form-field">
                                 <label for="login-password">Password</label>
-                                <input type="password" id="login-password" placeholder="Enter your password" required />
+                                <div class="input-wrapper">
+                                    <input type="password" id="login-password" placeholder="Enter your password"
+                                        readonly required />
+                                    <button type="button" class="paste-btn" id="paste-password">Coller</button>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary" id="login-btn">Login</button>
                         </form>
@@ -536,6 +573,46 @@
                     e.preventDefault();
                     if (window.AssetAuth) {
                         window.AssetAuth.logout();
+                    }
+                });
+            }
+
+            // Paste button functionality
+            const pasteEmailBtn = document.getElementById('paste-email');
+            const pastePasswordBtn = document.getElementById('paste-password');
+            const emailInput = document.getElementById('login-email');
+            const passwordInput = document.getElementById('login-password');
+
+            if (pasteEmailBtn) {
+                pasteEmailBtn.addEventListener('click', async function () {
+                    try {
+                        const text = await navigator.clipboard.readText();
+                        emailInput.value = text.trim();
+                        // Visual feedback
+                        pasteEmailBtn.textContent = '✓ Collé';
+                        setTimeout(() => {
+                            pasteEmailBtn.textContent = 'Coller';
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Failed to read clipboard:', err);
+                        alert('Impossible de lire le presse-papiers. Veuillez vérifier les permissions.');
+                    }
+                });
+            }
+
+            if (pastePasswordBtn) {
+                pastePasswordBtn.addEventListener('click', async function () {
+                    try {
+                        const text = await navigator.clipboard.readText();
+                        passwordInput.value = text.trim();
+                        // Visual feedback
+                        pastePasswordBtn.textContent = '✓ Collé';
+                        setTimeout(() => {
+                            pastePasswordBtn.textContent = 'Coller';
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Failed to read clipboard:', err);
+                        alert('Impossible de lire le presse-papiers. Veuillez vérifier les permissions.');
                     }
                 });
             }
