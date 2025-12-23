@@ -341,21 +341,17 @@
         }
 
         .section-header {
-            margin-bottom: 18px;
-            text-align: center;
-        }
-
-        .section-header>div {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 16px;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         .section-title {
             font-size: 18px;
             font-weight: 600;
-            text-align: center;
         }
 
         .section-kicker {
@@ -363,15 +359,12 @@
             text-transform: uppercase;
             letter-spacing: 0.18em;
             color: var(--muted);
-            text-align: center;
         }
 
         .section-intro {
             font-size: 12px;
             color: var(--muted);
-            max-width: 620px;
-            text-align: center;
-            margin: 0 auto;
+            max-width: 420px;
         }
 
         .twocol {
@@ -638,8 +631,111 @@
             color: var(--accent-strong);
         }
 
+        /* Donation Section */
+        .donation-section {
+            background: radial-gradient(circle at 50% 120%, rgba(245, 199, 106, 0.08), transparent 60%);
+        }
+
+        .donation-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .donation-card {
+            background: var(--card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .donation-card:hover {
+            border-color: rgba(245, 199, 106, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .donation-card-iban {
+            background: linear-gradient(145deg, rgba(245, 199, 106, 0.08), var(--card));
+            border-color: rgba(245, 199, 106, 0.2);
+        }
+
+        .donation-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--muted);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .donation-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: rgba(5, 8, 22, 0.6);
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .donation-address {
+            font-family: 'SF Mono', 'Roboto Mono', monospace;
+            font-size: 12px;
+            color: var(--text);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .donation-copy-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .donation-copy-btn:hover {
+            background: rgba(245, 199, 106, 0.1);
+        }
+
+        .donation-copy-btn .copy-icon {
+            width: 16px;
+            height: 16px;
+            background-color: currentColor;
+            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='13' height='13' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'%3E%3C/path%3E%3C/svg%3E") no-repeat center;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='13' height='13' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'%3E%3C/path%3E%3C/svg%3E") no-repeat center;
+            -webkit-mask-size: contain;
+            mask-size: contain;
+        }
+
+        .donation-copy-success {
+            color: #4cd964 !important;
+        }
+
+        @media (max-width: 880px) {
+            .donation-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Tablet and below */
         @media (max-width: 880px) {
+
 
             .hero-grid,
             .twocol,
@@ -1283,22 +1379,23 @@
                             <h2 class="section-title">From real estate roots to integrated asset management.</h2>
                         </div>
                         <div class="section-intro">
-                            Founded in 2018, Asset Holding initially focused on real estate development
-                            and project promotion before evolving into a broader multi-asset
-                            investment platform.
+                            Fondée en 2018, Asset Holding se concentrait initialement sur le développement
+                            immobilier et la promotion de projets avant d'évoluer vers une plateforme d'investissement
+                            multi-actifs plus large.
                         </div>
                     </div>
                     <div class="twocol">
                         <div class="section-text">
                             <p>
-                                Over the years, Asset Holding has worked on development projects, structured
-                                transactions and long-term holdings, constantly refining its approach around
-                                discipline, risk management and aligned interests with its investors.
+                                Au fil des ans, Asset Holding a travaillé sur des projets de développement, des
+                                transactions structurées et des détentions à long terme, affinant constamment
+                                son approche autour de la discipline, de la gestion des risques et des intérêts
+                                alignés avec ses investisseurs.
                             </p>
                             <p>
-                                Today, we bring together real assets, financial structures and strategic advice,
-                                always with the same objective: to build and preserve value over time,
-                                away from noise and short-termism.
+                                Aujourd'hui, nous réunissons actifs réels, structures financières et conseils
+                                stratégiques, toujours avec le même objectif : construire et préserver la
+                                valeur dans le temps, loin du bruit et du court-termisme.
                             </p>
                         </div>
                         <div class="section-card">
@@ -1329,10 +1426,13 @@
                     <div class="twocol">
                         <div class="section-text">
                             <p>
-                                Each client situation is unique. We combine real estate, financial instruments
-                                and customized structures to meet risk appetite, timeline and objectives.
-                                Our team works closely with legal and tax experts to ensure that each
-                                transaction makes sense, both economically and structurally.
+                                Chaque situation client est unique. Nous combinons l'immobilier, les instruments
+                                financiers et
+                                des structures personnalisées pour répondre à l'appétit au risque, au calendrier et aux
+                                objectifs. Notre équipe travaille
+                                en étroite collaboration avec des experts juridiques et fiscaux pour garantir que chaque
+                                transaction ait un sens, à la fois
+                                économiquement et structurellement.
                             </p>
                         </div>
                         <div class="section-card">
@@ -1356,51 +1456,52 @@
                             <h2 class="section-title">How we structure opportunities.</h2>
                         </div>
                         <div class="section-intro">
-                            We don't believe in "one size fits all". We build complementary strategies,
-                            structured across multiple segments.
+                            Nous ne croyons pas au "taille unique". Nous construisons des stratégies complémentaires,
+                            structurées
+                            sur plusieurs segments.
                         </div>
                     </div>
                     <div class="grid-3">
                         <a href="#collective-detail" class="mini-card">
-                            <div class="mini-card-title">Collective Management</div>
+                            <div class="mini-card-title">Gestion Collective</div>
                             <div class="mini-card-text">
-                                Pooled investment vehicles, reserved for a restricted circle of qualified investors
-                                (Click for Details).
+                                Véhicules d'investissement mutualisés, réservés à un cercle restreint d'investisseurs
+                                qualifiés (Cliquez pour Détails).
                             </div>
                         </a>
                         <a href="#private-detail" class="mini-card">
-                            <div class="mini-card-title">Customized Private Mandates</div>
+                            <div class="mini-card-title">Mandats Privés Personnalisés</div>
                             <div class="mini-card-text">
-                                Tailor-made solutions for wealthy families and entrepreneurs with defined objectives
-                                (Click for Details).
+                                Solutions sur mesure pour les familles fortunées et les entrepreneurs avec des objectifs
+                                définis (Cliquez pour Détails).
                             </div>
                         </a>
                         <a href="#equity-detail" class="mini-card">
-                            <div class="mini-card-title">Equity & Participations</div>
+                            <div class="mini-card-title">Capital et Participations</div>
                             <div class="mini-card-text">
-                                Direct or indirect equity stakes in development vehicles
-                                (Click for Details).
+                                Prises de participation directes ou indirectes dans des véhicules de développement
+                                (Cliquez pour Détails).
                             </div>
                         </a>
                         <a href="#loan-detail" class="mini-card">
-                            <div class="mini-card-title">Loan & Credit Structures</div>
+                            <div class="mini-card-title">Structures de Prêts et Crédits</div>
                             <div class="mini-card-text">
-                                Senior, Mezzanine or Bridge financial structures, calibrated on cash flows
-                                (Click for Details).
+                                Montages financiers Senior, Mezzanine ou Bridge, calibrés sur les flux de trésorerie
+                                (Cliquez pour Détails).
                             </div>
                         </a>
                         <a href="#realestate-detail" class="mini-card">
-                            <div class="mini-card-title">Real Estate Projects</div>
+                            <div class="mini-card-title">Projets Immobiliers</div>
                             <div class="mini-card-text">
-                                Development, repositioning and long-term holding of strategic assets (Click
-                                for Details).
+                                Développement, repositionnement et détention à long terme d'actifs stratégiques (Cliquez
+                                pour Détails).
                             </div>
                         </a>
                         <a href="#marketing-detail" class="mini-card">
-                            <div class="mini-card-title">Strategic Advisory (Marketing)</div>
+                            <div class="mini-card-title">Conseil Stratégique (Marketing)</div>
                             <div class="mini-card-text">
-                                Support for developers on structuring, negotiation and capital raising
-                                (Click for Details).
+                                Accompagnement des promoteurs sur le montage, la négociation et la levée de capitaux
+                                (Cliquez pour Détails).
                             </div>
                         </a>
                     </div>
@@ -1411,33 +1512,34 @@
                 <div class="container">
                     <div class="section-header">
                         <div>
-                            <h2 class="section-title">Collective Management Mandates: Pooling Opportunities.</h2>
+                            <div class="section-kicker">Segment de Détail</div>
+                            <h2 class="section-title">Mandats de Gestion Collective: Mutualisation d'Opportunités.</h2>
                         </div>
                         <div class="section-intro">
-                            These investment vehicles allow capital to be pooled to target specific assets,
-                            often inaccessible individually.
+                            Ces véhicules d'investissement permettent de regrouper des capitaux pour cibler des actifs
+                            spécifiques, souvent inaccessibles individuellement.
                         </div>
                     </div>
                     <div class="feature-layout inverted">
                         <div class="section-text">
                             <p>
-                                For investors seeking diversified exposure with active management.
-                                These closed structures allow Asset Holding to deploy complex investment
-                                strategies in targeted markets.
+                                Pour les investisseurs qui recherchent une exposition diversifiée avec une gestion
+                                active. Ces structures fermées permettent à Asset Holding de déployer des stratégies
+                                d'investissement complexes sur des marchés ciblés.
                             </p>
                             <p>
-                                We ensure group cohesion and deployment strategy, based on strict selection
-                                criteria and total alignment of the interests of all participants.
-                                Monitoring is regular and transparent.
+                                Nous assurons la cohésion du groupe et la stratégie de déploiement, basée sur des
+                                critères stricts de sélection et un alignement total des intérêts de tous les
+                                participants. Le suivi est régulier et transparent.
                             </p>
                         </div>
                         <div class="feature-box">
-                            <h3>Application Framework</h3>
+                            <h3>Cadre d'application</h3>
                             <ul class="feature-list">
-                                <li>Closed-end investment structures.</li>
-                                <li>Open only to qualified investors.</li>
-                                <li>Predefined acquisition and exit strategy.</li>
-                                <li>Transaction cost optimization through scale effect.</li>
+                                <li>Structures d'investissement à capital fermé.</li>
+                                <li>Ouvert uniquement aux investisseurs qualifiés.</li>
+                                <li>Stratégie d'acquisition et de sortie prédéfinie.</li>
+                                <li>Optimisation des coûts de transaction grâce à l'effet de taille.</li>
                             </ul>
                         </div>
                     </div>
@@ -1448,33 +1550,34 @@
                 <div class="container">
                     <div class="section-header">
                         <div>
-                            <h2 class="section-title">Customized Private Management: Personalized Strategy.</h2>
+                            <div class="section-kicker">Segment de Détail</div>
+                            <h2 class="section-title">Gestion Privée Sur Mesure : Stratégie Personnalisée.</h2>
                         </div>
                         <div class="section-intro">
-                            We address the complex needs of families, family offices and
-                            ultra-high net worth investors with unique solutions.
+                            Nous adressons les besoins complexes des familles, des bureaux familiaux et des
+                            investisseurs ultra-nets avec des solutions uniques.
                         </div>
                     </div>
                     <div class="feature-layout">
                         <div class="section-text">
                             <p>
-                                Unlike standard products, our private mandates are unique roadmaps,
-                                integrating the tax environment (particularly in relation to Switzerland),
-                                estate planning and liquidity requirements specific to each estate.
+                                Contrairement aux produits standards, nos mandats privés sont des feuilles de route
+                                uniques, intégrant l'environnement fiscal (notamment en lien avec la Suisse), la
+                                planification successorale et les exigences de liquidité propres à chaque patrimoine.
                             </p>
                             <p>
-                                The objective is to optimize growth and ensure wealth transmission in a
-                                secure and professional framework. The approach is holistic, covering
-                                financial and real assets.
+                                L'objectif est d'optimiser la croissance et d'assurer la transmission du patrimoine dans
+                                un cadre sécurisé et professionnel. L'approche est holistique, couvrant les actifs
+                                financiers et réels.
                             </p>
                         </div>
                         <div class="feature-box">
-                            <h3>Our Commitment</h3>
+                            <h3>Notre engagement</h3>
                             <ul class="feature-list">
-                                <li>Holistic approach (wealth, taxation, succession).</li>
-                                <li>Integration of legal experts in Switzerland.</li>
-                                <li>Performance reports adapted to Family Office constraints.</li>
-                                <li>Absolute confidentiality and discretion.</li>
+                                <li>Approche holistique (patrimoine, fiscalité, succession).</li>
+                                <li>Intégration d'experts juridiques en Suisse.</li>
+                                <li>Rapports de performance adaptés aux contraintes du Family Office.</li>
+                                <li>Confidentialité et discrétion absolues.</li>
                             </ul>
                         </div>
                     </div>
@@ -1485,33 +1588,34 @@
                 <div class="container">
                     <div class="section-header">
                         <div>
-                            <h2 class="section-title">Equity Investment: Active Participations.</h2>
+                            <div class="section-kicker">Segment de Détail</div>
+                            <h2 class="section-title">Investissement en Capital : Prises de Participations Actives.</h2>
                         </div>
                         <div class="section-intro">
-                            Asset Holding identifies equity investment opportunities in high-potential projects
-                            or unlisted companies.
+                            Asset Holding identifie des opportunités d'investissement en fonds propres dans des projets
+                            à fort potentiel ou des sociétés non cotées.
                         </div>
                     </div>
                     <div class="feature-layout inverted">
                         <div class="section-text">
                             <p>
-                                Our approach is that of a strategic partner, involved in governance and value
-                                creation of the company or project. We are not passive investors,
-                                but growth facilitators.
+                                Notre approche est celle d'un partenaire stratégique, impliqué dans la gouvernance et la
+                                création de valeur de la société ou du projet. Nous ne sommes pas des investisseurs
+                                passifs, mais des facilitateurs de croissance.
                             </p>
                             <p>
-                                Each equity stake is structured with a clear vision of the exit horizon
-                                and capital protection mechanisms (oversight rights, structured governance).
-                                We invest where we can positively impact performance.
+                                Chaque prise de participation est structurée avec une vision claire de l'horizon de
+                                sortie et des mécanismes de protection du capital (droit de regard, gouvernance
+                                structurée). Nous investissons là où nous pouvons impacter positivement la performance.
                             </p>
                         </div>
                         <div class="feature-box">
-                            <h3>Key Criteria</h3>
+                            <h3>Critères clés</h3>
                             <ul class="feature-list">
-                                <li>High growth potential.</li>
-                                <li>Structured and aligned governance.</li>
-                                <li>Investor capital protection mechanisms.</li>
-                                <li>Defined medium/long-term exit strategy.</li>
+                                <li>Potentiel de croissance élevé.</li>
+                                <li>Gouvernance structurée et alignée.</li>
+                                <li>Mécanismes de protection du capital investisseur.</li>
+                                <li>Stratégie de sortie définie à moyen/long terme.</li>
                             </ul>
                         </div>
                     </div>
@@ -1522,33 +1626,34 @@
                 <div class="container">
                     <div class="section-header">
                         <div>
-                            <h2 class="section-title">Debt Structures and Structured Financing.</h2>
+                            <div class="section-kicker">Segment de Détail</div>
+                            <h2 class="section-title">Structures de Dette et Financement Structuré.</h2>
                         </div>
                         <div class="section-intro">
-                            We design financing solutions adapted to the specific needs of our projects
-                            or those of our partners.
+                            Nous concevons des solutions de financement adaptées aux besoins spécifiques de nos projets
+                            ou de ceux de nos partenaires.
                         </div>
                     </div>
                     <div class="feature-layout">
                         <div class="section-text">
                             <p>
-                                These financial structures can range from secured senior loans to more flexible
-                                mezzanine financing. Debt is an essential tool for optimizing equity returns,
-                                and our structures are meticulously calibrated.
+                                Ces montages financiers peuvent aller du prêt senior sécurisé aux financements mezzanine
+                                plus flexibles. La dette est un outil essentiel pour optimiser le rendement du capital
+                                propre, et nos structures sont méticuleusement calibrées.
                             </p>
                             <p>
-                                Financing terms (covenants, guarantees, collateral) are specifically negotiated
-                                by our team in Switzerland to minimize default risk and secure lent capital
-                                against project cash flows.
+                                Les termes du financement (covenants, garanties, collatéraux) sont spécifiquement
+                                négociés par notre équipe en Suisse pour minimiser le risque de défaut et sécuriser le
+                                capital prêté contre les flux de trésorerie du projet.
                             </p>
                         </div>
                         <div class="feature-box">
-                            <h3>Financing Types</h3>
+                            <h3>Types de financement</h3>
                             <ul class="feature-list">
-                                <li>Senior and secured loans.</li>
-                                <li>Flexible Mezzanine financing.</li>
-                                <li>'Bridge' loans for short-term liquidity needs.</li>
-                                <li>Guarantees and securities on real estate or real assets.</li>
+                                <li>Prêts Senior et sécurisés.</li>
+                                <li>Financements Mezzanine flexibles.</li>
+                                <li>Prêts 'Bridge' pour les besoins de liquidité à court terme.</li>
+                                <li>Garanties et sûretés sur actifs immobiliers ou réels.</li>
                             </ul>
                         </div>
                     </div>
@@ -1559,32 +1664,34 @@
                 <div class="container">
                     <div class="section-header">
                         <div>
-                            <h2 class="section-title">Real Estate Assets: Value and Development.</h2>
+                            <div class="section-kicker">Segment de Détail</div>
+                            <h2 class="section-title">Actifs Immobiliers Réels : Valeur et Développement.</h2>
                         </div>
                         <div class="section-intro">
-                            Our historical expertise is based on real estate, covering acquisition, development
-                            of complex projects, and long-term asset management.
+                            Notre expertise historique repose sur l'immobilier, couvrant l'acquisition, le développement
+                            de projets complexes, et la gestion d'actifs à long terme.
                         </div>
                     </div>
                     <div class="feature-layout inverted">
                         <div class="section-text">
                             <p>
-                                We favor markets where fundamentals (demographics, economy) justify sustainable
-                                valuation. We focus on creating tangible value through development or
-                                strategic repositioning of assets.
+                                Nous privilégions les marchés où les fondamentaux (démographie, économie) justifient une
+                                valorisation pérenne. Nous nous concentrons sur la création de valeur tangible via le
+                                développement ou le repositionnement stratégique d'actifs.
                             </p>
                             <p>
-                                We are not speculators, but builders of real estate value. Each asset must
-                                present a robust business plan and resilience to economic cycles.
+                                Nous ne sommes pas des spéculateurs, mais des constructeurs de valeur immobilière.
+                                Chaque actif doit présenter un business plan robuste et une résilience face aux cycles
+                                économiques.
                             </p>
                         </div>
                         <div class="feature-box">
-                            <h3>Areas of Intervention</h3>
+                            <h3>Domaines d'intervention</h3>
                             <ul class="feature-list">
-                                <li>Development of residential and commercial projects.</li>
-                                <li>Repositioning of existing assets (Value-add).</li>
-                                <li>Holding of assets generating stable income.</li>
-                                <li>In-depth market analysis before any commitment.</li>
+                                <li>Développement de projets résidentiels et commerciaux.</li>
+                                <li>Repositionnement d'actifs existants (Value-add).</li>
+                                <li>Détention d'actifs générant des revenus stables.</li>
+                                <li>Analyse approfondie du marché avant tout engagement.</li>
                             </ul>
                         </div>
                     </div>
@@ -1595,33 +1702,34 @@
                 <div class="container">
                     <div class="section-header">
                         <div>
-                            <h2 class="section-title">Strategic Advisory and Project Positioning.</h2>
+                            <div class="section-kicker">Segment de Détail</div>
+                            <h2 class="section-title">Conseil Stratégique et Positionnement de Projets.</h2>
                         </div>
                         <div class="section-intro">
-                            This service goes beyond simple advice. We help project sponsors refine their
-                            investment proposition and attract capital.
+                            Ce service va au-delà du simple conseil. Nous aidons les porteurs de projets à affiner leur
+                            proposition d'investissement et à attirer les capitaux.
                         </div>
                     </div>
                     <div class="feature-layout">
                         <div class="section-text">
                             <p>
-                                Asset Holding supports developers and sponsors upstream of their operations. This
-                                includes assistance with structuring legal and financial vehicles, economic modeling
-                                and creation of professional documentation.
+                                Asset Holding soutient les promoteurs et les sponsors en amont de leurs opérations. Cela
+                                inclut l'aide à la structuration des véhicules juridiques et financiers, la modélisation
+                                économique et la création de documentation professionnelle.
                             </p>
                             <p>
-                                Our network allows us to ensure targeted and effective fundraising, by positioning
-                                the offer with investors whose profile matches the project's needs
-                                (the targeted "Marketing" of the operation).
+                                Notre réseau nous permet d'assurer une levée de fonds ciblée et efficace, en
+                                positionnant l'offre auprès d'investisseurs dont le profil correspond aux besoins du
+                                projet (le "Marketing" ciblé de l'opération).
                             </p>
                         </div>
                         <div class="feature-box">
-                            <h3>Key Services</h3>
+                            <h3>Services Clés</h3>
                             <ul class="feature-list">
-                                <li>Audit of the project's legal and tax structure.</li>
-                                <li>Development of investment documentation (IM, pitches).</li>
-                                <li>Assistance in negotiating Term Sheets.</li>
-                                <li>Targeted networking for capital raising.</li>
+                                <li>Audit de la structure juridique et fiscale du projet.</li>
+                                <li>Élaboration de la documentation d'investissement (IM, pitchs).</li>
+                                <li>Assistance à la négociation des Term Sheets.</li>
+                                <li>Mise en relation ciblée pour la levée de capitaux.</li>
                             </ul>
                         </div>
                     </div>
@@ -1671,18 +1779,20 @@
                     <div class="feature-layout">
                         <div class="section-text">
                             <p>
-                                Before proposing an investment, we take the time to understand the investor's profile:
-                                the origin of their wealth, their risk appetite, time horizon,
-                                expectations and constraints.
+                                Avant de proposer un investissement, nous prenons le temps de comprendre le profil de
+                                l'investisseur :
+                                l'origine de son patrimoine, son appétit pour le risque, l'horizon temporel, les
+                                attentes et les contraintes.
                             </p>
                             <p>
-                                We then structure a proposal that may include one or more strategies
-                                (loan, equity, co-investment, real estate exposure, etc.), always with a
-                                clear risk/return logic and documented scenarios.
+                                Nous structurons ensuite une proposition qui peut inclure une ou plusieurs stratégies
+                                (prêt, capital, co-investissement, exposition immobilière, etc.), toujours avec une
+                                logique risque/rendement claire et des scénarios documentés.
                             </p>
                             <p>
-                                Once alignment is found, we formalize the conditions in a clear framework
-                                (Term Sheet, agreement, guarantees) and only after that, we move to execution.
+                                Une fois l'alignement trouvé, nous formalisons les conditions dans un cadre limpide
+                                (Term Sheet, accord,
+                                garanties) et seulement après cela, nous passons à l'exécution.
                             </p>
                             <div class="pill-list">
                                 <span class="pill-soft">Profile & objectives</span>
@@ -1694,18 +1804,19 @@
                         <div class="feature-box">
                             <h3>Submit an investment proposal</h3>
                             <p>
-                                If you have a project or capital to deploy, you can share a brief overview
-                                including:
+                                Si vous avez un projet ou des capitaux à déployer, vous pouvez partager un bref aperçu
+                                incluant :
                             </p>
                             <ul class="feature-list">
-                                <li>Type of project or investment idea</li>
-                                <li>Required amount and timeline (tranches, horizon)</li>
-                                <li>Location, structure and guarantees (if applicable)</li>
-                                <li>Contact details and preferred means of communication</li>
+                                <li>Type de projet ou idée d'investissement</li>
+                                <li>Montant et calendrier requis (tranches, horizon)</li>
+                                <li>Localisation, structure et garanties (si applicable)</li>
+                                <li>Coordonnées et moyen de communication préféré</li>
                             </ul>
                             <p class="note">
-                                You can send an initial summary by email; we will only contact you if the opportunity
-                                matches our criteria and current priorities.
+                                Vous pouvez envoyer un résumé initial par email ; nous vous recontacterons uniquement si
+                                l'opportunité
+                                correspond à nos critères et à nos priorités actuelles.
                             </p>
                             <button class="btn btn-primary" style="margin-top:8px;">
                                 Request an initial call
@@ -1729,24 +1840,27 @@
                     <div class="feature-layout">
                         <div class="section-text">
                             <p>
-                                The client area is not a public platform. Access is granted manually to clients with
-                                active mandates or ongoing transactions. It may contain:
+                                L'espace client n'est pas une plateforme publique. L'accès est accordé manuellement aux
+                                clients avec
+                                des mandats actifs ou des transactions en cours. Il peut contenir :
                             </p>
                             <ul class="feature-list">
-                                <li>Confidential documentation and contracts</li>
-                                <li>Reports, statements and follow-up notes</li>
-                                <li>Project-specific documents, schedules and updates</li>
+                                <li>Confidential documentation et contrats</li>
+                                <li>Rapports, relevés et notes de suivi</li>
+                                <li>Documents spécifiques au projet, calendriers et mises à jour</li>
                             </ul>
                             <p class="note">
-                                For security and confidentiality reasons, access details are communicated
-                                directly by our team, not via online registration.
+                                Pour des raisons de sécurité et de confidentialité, les détails d'accès sont communiqués
+                                directement par notre équipe,
+                                et non via une inscription en ligne.
                             </p>
                         </div>
                         <div class="feature-box">
                             <h3>Existing client?</h3>
                             <p>
-                                If you are already a client and need access or assistance regarding
-                                your documents or reports, please contact us directly.
+                                Si vous êtes déjà client et que vous avez besoin d'un accès ou d'assistance concernant
+                                vos documents ou
+                                rapports, veuillez nous contacter directement.
                             </p>
                             <button class="btn btn-outline" style="margin-top:8px;">
                                 Contact for client access
@@ -1821,8 +1935,8 @@
                             <h2 class="section-title">Let’s explore your next step.</h2>
                         </div>
                         <div class="section-intro">
-                            We prefer direct and clear conversations. A short call is often more
-                            effective than a long email exchange.
+                            Nous préférons les conversations directes et claires. Un appel court est souvent plus
+                            efficace qu'un long échange d'e-mails.
                         </div>
                     </div>
                     <div class="contact">
@@ -1837,7 +1951,7 @@
                         <div class="contact-cta">
                             <button class="btn btn-primary">Request an initial call</button>
                             <small>
-                                We usually respond within 24 hours. Confidentiality assured.
+                                Nous répondons généralement dans les 24 heures. Confidentialité assurée.
                             </small>
                         </div>
                     </div>
@@ -1851,7 +1965,7 @@
             <div class="container">
                 <div class="footer-row">
                     <div>
-                        &copy; 2025 Asset Holding. All rights reserved.
+                        &copy; 2024 Asset Holding. All rights reserved.
                     </div>
                     <div class="footer-links">
                         <a href="#story">Our Story</a>
