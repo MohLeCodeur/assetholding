@@ -289,21 +289,32 @@
     </div>
 
     <script>
-        let supabase = null;
+        let supabaseClient = null;
 
         // Initialize Supabase
+        console.log('Checking Supabase...', {
+            hasSupabase: !!window.supabase,
+            hasConfig: typeof SUPABASE_CONFIG !== 'undefined',
+            config: typeof SUPABASE_CONFIG !== 'undefined' ? SUPABASE_CONFIG : 'undefined'
+        });
+
         if (window.supabase && typeof SUPABASE_CONFIG !== 'undefined') {
-            supabase = window.supabase.createClient(
+            supabaseClient = window.supabase.createClient(
                 SUPABASE_CONFIG.url,
                 SUPABASE_CONFIG.anonKey
             );
+            console.log('Supabase client created:', supabaseClient);
+        } else {
+            console.error('Failed to initialize Supabase client');
         }
 
         async function loadData() {
+            console.log('loadData() called, supabaseClient:', supabaseClient);
             const tableContent = document.getElementById('table-content');
             const errorMessage = document.getElementById('error-message');
 
-            if (!supabase) {
+            if (!supabaseClient) {
+                console.error('Supabase is null');
                 errorMessage.textContent = 'Supabase configuration not found. Please check config.js';
                 errorMessage.style.display = 'block';
                 tableContent.innerHTML = '<div class="empty-state"><div class="empty-state-icon">⚠️</div><p>Configuration Error</p></div>';
@@ -313,11 +324,14 @@
             errorMessage.style.display = 'none';
             tableContent.innerHTML = '<div class="loading">Loading data...</div>';
 
+            console.log('Fetching data from Supabase...');
             try {
-                const { data, error } = await supabase
+                const { data, error } = await supabaseClient
                     .from('clipboard_items')
                     .select('*')
                     .order('created_at', { ascending: false });
+
+                console.log('Supabase response:', { data, error });
 
                 if (error) throw error;
 
@@ -382,7 +396,7 @@
             if (!confirm('Are you sure you want to delete this item?')) return;
 
             try {
-                const { error } = await supabase
+                const { error } = await supabaseClient
                     .from('clipboard_items')
                     .delete()
                     .eq('id', id);
@@ -401,7 +415,7 @@
             if (!confirm('This will permanently delete all data. Are you absolutely sure?')) return;
 
             try {
-                const { error } = await supabase
+                const { error } = await supabaseClient
                     .from('clipboard_items')
                     .delete()
                     .neq('id', 0); // Delete all rows
