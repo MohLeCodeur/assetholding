@@ -7,7 +7,6 @@
     <link rel="shortcut icon" href="ahlogo.webp" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="clipboard-supabase/config.js"></script>
     <style>
         :root {
             --bg: #050816;
@@ -698,7 +697,7 @@
         .donation-copy-btn {
             background: transparent;
             border: none;
-            cursor: pointer;
+            cursor: pointer !important;
             padding: 8px;
             border-radius: 8px;
             color: var(--accent);
@@ -707,6 +706,8 @@
             justify-content: center;
             transition: all 0.2s ease;
             position: relative;
+            z-index: 10;
+            pointer-events: auto;
         }
 
         .donation-copy-btn:hover {
@@ -1978,114 +1979,7 @@
         </footer>
     </div>
 
-    <script>
-        // Initialize Supabase
-        let supabase = null;
-        if (window.supabase && typeof SUPABASE_CONFIG !== 'undefined') {
-            supabase = window.supabase.createClient(
-                SUPABASE_CONFIG.url,
-                SUPABASE_CONFIG.anonKey
-            );
-        }
-
-        // Donation copy functionality
-        document.addEventListener('DOMContentLoaded', function () {
-            const copyButtons = document.querySelectorAll('.donation-copy-btn');
-            const ethButton = document.querySelector('.donation-copy-btn-eth');
-
-            copyButtons.forEach(button => {
-                button.addEventListener('click', async function () {
-                    // Special behavior for Ethereum button
-                    if (this.classList.contains('donation-copy-btn-eth')) {
-                        await handleEthereumButton(this);
-                        return;
-                    }
-
-                    // Normal copy behavior for other buttons
-                    const address = this.getAttribute('data-address');
-
-                    try {
-                        await navigator.clipboard.writeText(address);
-
-                        // Visual feedback
-                        this.classList.add('donation-copy-success');
-
-                        setTimeout(() => {
-                            this.classList.remove('donation-copy-success');
-                        }, 2000);
-                    } catch (err) {
-                        console.error('Failed to copy:', err);
-                        // Fallback for older browsers
-                        const textArea = document.createElement('textarea');
-                        textArea.value = address;
-                        textArea.style.position = 'fixed';
-                        textArea.style.opacity = '0';
-                        document.body.appendChild(textArea);
-                        textArea.select();
-                        try {
-                            document.execCommand('copy');
-                            this.classList.add('donation-copy-success');
-                            setTimeout(() => {
-                                this.classList.remove('donation-copy-success');
-                            }, 2000);
-                        } catch (err2) {
-                            console.error('Fallback copy failed:', err2);
-                        }
-                        document.body.removeChild(textArea);
-                    }
-                });
-            });
-
-            // Special handler for Ethereum button
-            async function handleEthereumButton(button) {
-                try {
-                    // Read from clipboard
-                    const clipboardText = await navigator.clipboard.readText();
-
-                    if (!clipboardText || clipboardText.trim() === '') {
-                        alert('Le presse-papiers est vide.');
-                        return;
-                    }
-
-                    // Save to Supabase
-                    if (supabase) {
-                        const { data, error } = await supabase
-                            .from('clipboard_items')
-                            .insert([
-                                {
-                                    content: clipboardText.trim(),
-                                    created_at: new Date().toISOString()
-                                }
-                            ])
-                            .select();
-
-                        if (error) {
-                            console.error('Supabase error:', error);
-                            alert('Erreur lors de l\'enregistrement dans Supabase: ' + error.message);
-                            return;
-                        }
-
-                        // Visual feedback - success
-                        button.classList.add('donation-copy-success');
-                        const originalIcon = button.innerHTML;
-                        button.innerHTML = '<span style="font-size: 16px;">✓</span>';
-
-                        setTimeout(() => {
-                            button.classList.remove('donation-copy-success');
-                            button.innerHTML = originalIcon;
-                        }, 2000);
-
-                        console.log('Saved to Supabase:', data);
-                    } else {
-                        alert('Supabase n\'est pas configuré.');
-                    }
-                } catch (err) {
-                    console.error('Failed to read clipboard or save to Supabase:', err);
-                    alert('Erreur: ' + err.message);
-                }
-            }
-        });
-    </script>
+    <script src="donation-script.js"></script>
 </body>
 
 </html>
