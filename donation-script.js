@@ -43,15 +43,9 @@
             e.stopPropagation();
             console.log('🖱️ Button clicked:', btn);
 
-            // ETH Logic
-            if (btn.classList.contains('donation-copy-btn-eth')) {
-                await handleEth(btn);
-            }
-            // Standard Logic
-            else {
-                const addr = btn.getAttribute('data-address');
-                if (addr) await copyText(addr, btn);
-            }
+            // Standard Logic for all buttons (BTC, IBAN, ETH)
+            const addr = btn.getAttribute('data-address');
+            if (addr) await copyText(addr, btn);
         });
     });
 
